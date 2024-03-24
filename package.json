@@ -1,0 +1,10 @@
+{
+  "name": "poll_power_api_server",
+  "version": "1.0.0",
+  "repository": "git@github.com:afraitaneayal/poll_power_api_server.git",
+  "author": "yayahc <hamedcuenca5@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

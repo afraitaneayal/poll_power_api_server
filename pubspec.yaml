@@ -27,4 +27,4 @@ dev_dependencies:
 scripts:
   watch: "dart run build_runner watch"
   build: "dart run build_runner build"
-  start: "dart run bin/main.dart"
+  start: "yarn nodemon --exec dart bin/main.dart"
