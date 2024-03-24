@@ -1,15 +1,30 @@
 name: poll_power_api_server
-description: A sample command-line application.
+description: Little API server for poll power project
 version: 1.0.0
 # repository: https://github.com/my_org/my_repo
+publish_to: none
 
 environment:
   sdk: ^3.2.6
 
 # Add regular dependencies here.
 dependencies:
+  build_runner: ^2.4.8
+  get_it: ^7.6.7
+  injectable: ^2.4.0
+  injectable_generator: ^2.6.1
   # path: ^1.8.0
+  openapi_base: ^1.3.1
+  poll_power_openapi_generated:
+    git:
+      url:
+        https://github.com/afraitaneayal/poll_power_api_definition
 
 dev_dependencies:
   lints: ^2.1.0
   test: ^1.24.0
+
+scripts:
+  watch: "dart run build_runner watch"
+  build: "dart run build_runner build"
+  start: "dart run bin/main.dart"
