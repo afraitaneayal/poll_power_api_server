@@ -4,3 +4,6 @@
 
 # Skip node
 node_modules
+
+# Skip env
+.env
