@@ -8,6 +8,7 @@
 
 **Int db:**
 - Create .env file and put your dbUrl required by [prisma](https://prisma.pub/)
+like DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 
 **Run:**
 - rps generate

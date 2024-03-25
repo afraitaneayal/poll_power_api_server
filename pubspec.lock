@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      sha256: "24a261d5d5c87e86c7651c417a5dbdf8bcd7080dd592533910e8d0505a279f21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   dio:
     dependency: transitive
     description:
@@ -329,6 +337,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
+  json_rpc_2:
+    dependency: transitive
+    description:
+      name: json_rpc_2
+      sha256: "5e469bffa23899edacb7b22787780068d650b106a21c76db3c49218ab7ca447e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   lints:
     dependency: "direct dev"
     description:
@@ -401,6 +417,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  orm:
+    dependency: "direct main"
+    description:
+      name: orm
+      sha256: fb7b4e8795e1caf3964573939d56ef9d965a4ad3cff3936d2f86f0cd31c0944e
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.2"
   package_config:
     dependency: transitive
     description:
@@ -422,7 +446,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "88cac8c9581ea7d9c1a2f5bc5ce537bf3e14eb24"
+      resolved-ref: c5233807d1535a2a4308c97f705c9e3b1d590b33
       url: "https://github.com/afraitaneayal/poll_power_api_definition"
     source: git
     version: "1.4.0"
@@ -458,6 +482,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      sha256: ba58e9e18df9abde280e8b10051e4bce85091e41e8e7e411b6cde2e738d357cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
   recase:
     dependency: transitive
     description:
@@ -466,6 +498,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  retry:
+    dependency: transitive
+    description:
+      name: retry
+      sha256: "822e118d5b3aafed083109c72d5f484c6dc66707885e07c0fbcb8b986bba7efc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   shelf:
     dependency: transitive
     description:
@@ -666,6 +706,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.3"
+  webfetch:
+    dependency: transitive
+    description:
+      name: webfetch
+      sha256: "08cb156e0b476447da5c9d2cd30a4ca7d63270310153fc351aa536217d73d859"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.15"
   webkit_inspection_protocol:
     dependency: transitive
     description:

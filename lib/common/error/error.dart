@@ -12,7 +12,7 @@ class ErrorCatcher {
 }
 
 abstract class ServerError {
-  Error getError();
+  APIError getError();
 }
 
 class GenericServerError extends ServerError {
@@ -23,9 +23,9 @@ class GenericServerError extends ServerError {
       {required this.devMessage, required this.userFriendlyMessage});
 
   @override
-  Error getError() {
-    return Error(
-        error: APIError(
+  APIError getError() {
+    return APIError(
+        error: APIErrorContent(
             devMessage: devMessage, userFriendlyMessage: userFriendlyMessage));
   }
 }
