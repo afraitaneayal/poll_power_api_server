@@ -1,6 +1,6 @@
 import 'package:openapi_base/openapi_base.dart';
 import 'package:poll_power_api_server/di.dart';
-import 'package:poll_power_openapi_generated/poll_power_openapi.dart';
+import 'package:poll_power_openapi/poll_power_openapi.dart';
 import 'api_endpoint_provider.dart';
 
 Future<void> startRestServer() async {

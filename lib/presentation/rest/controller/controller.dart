@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:openapi_base/openapi_base.dart';
-import 'package:poll_power_openapi_generated/poll_power_openapi.dart';
+import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:poll_power_openapi/poll_power_openapi.dart';
 
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
@@ -19,12 +22,6 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   }
 
   @override
-  Future<SignUpUserResponse> signUpUser({required bool isCandidate}) {
-    // TODO: implement signUpUser
-    throw UnimplementedError();
-  }
-
-  @override
   Future<SubscribeResponse> subscribe() {
     // TODO: implement subscribe
     throw UnimplementedError();
@@ -40,5 +37,16 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   Future<GetBasePathResponse> getBasePath() async {
     return GetBasePathResponse.response200(
         "welcome to poll power api sever ...");
+  }
+
+  @override
+  Future<SignUpCandidateResponse> signUpCandidate(Candidate body) {
+    // TODO: implement signUpCandidate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<SignUpUserResponse> signUpUser(User body) async {
+    throw UnimplementedError();
   }
 }
