@@ -1,0 +1,1 @@
+/// Prisma models are already generated base on prisma/prisma.schema

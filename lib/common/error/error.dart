@@ -1,12 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
 
 class ErrorCatcher {
-  static Future<void> tryCatch<T>(Future<T> fn) async {
+  static Future<Either<ServerError, T>> tryCatch<T>(Future<T> fn) async {
     try {
-      await fn;
+      final result = await fn;
+      return right(result);
     } catch (e) {
       final error = e.toString();
-      print(error);
+      return left(GenericServerError(
+          devMessage: error, userFriendlyMessage: "Une erreur c'est produite"));
     }
   }
 }
