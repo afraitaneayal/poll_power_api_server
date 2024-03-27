@@ -5,5 +5,6 @@ import 'package:poll_power_api_server/domain/params/candidate/get_candidate_para
 
 abstract class ICandidateDatasourceRepository with TransformTo {
   Future<CandidateEntity> createCandidate(CreateCandidateParam param);
-  Future<CandidateEntity> getCandidate(GetCandidateParam param);
+  Future<CandidateEntity?> getCandidate(GetCandidateParam param);
+  Future<List<CandidateEntity>> getAllCandidate();
 }

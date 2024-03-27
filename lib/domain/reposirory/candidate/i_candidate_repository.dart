@@ -5,5 +5,6 @@ import '../../entities/candidate/candidate.dart';
 abstract class ICandidateRepository {
   Future<CandidateEntity> createCandidate(CreateCandidateParam param);
 
-  Future<CandidateEntity> getCandidate(GetCandidateParam param);
+  Future<CandidateEntity?> getCandidate(GetCandidateParam param);
+  Future<List<CandidateEntity>> getAllCandidate();
 }

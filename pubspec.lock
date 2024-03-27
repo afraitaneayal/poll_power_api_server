@@ -462,7 +462,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: c5233807d1535a2a4308c97f705c9e3b1d590b33
+      resolved-ref: "2b42df0ab86ea4664831b1f82e8df42872de8677"
       url: "https://github.com/afraitaneayal/poll_power_api_definition"
     source: git
     version: "1.4.0"

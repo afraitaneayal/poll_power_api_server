@@ -17,8 +17,13 @@ class CandidateRepositoryImpl implements ICandidateRepository {
   }
 
   @override
-  Future<CandidateEntity> getCandidate(GetCandidateParam param) {
-    // TODO: implement getCandidate
-    throw UnimplementedError();
+  Future<CandidateEntity?> getCandidate(GetCandidateParam param) async {
+    return await _candidateDatasourceRepository.getCandidate(param);
+  }
+
+  @override
+  Future<List<CandidateEntity>> getAllCandidate() async {
+    final candidates = await _candidateDatasourceRepository.getAllCandidate();
+    return candidates;
   }
 }

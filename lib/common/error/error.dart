@@ -46,3 +46,11 @@ class InvalidTokenError extends GenericServerError {
             devMessage: "Invalid token given",
             userFriendlyMessage: "Token invalid");
 }
+
+class InternalServerErrorWhileProccessing extends GenericServerError {
+  InternalServerErrorWhileProccessing()
+      : super(
+            devMessage: "Internal server error",
+            userFriendlyMessage:
+                "Une erreur c'est produite sur le serveur veuiller reesayer");
+}

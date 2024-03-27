@@ -36,9 +36,13 @@ class LocalCandidateDatasource implements ICandidateDatasourceRepository {
   }
 
   @override
-  Future<CandidateEntity> getCandidate(GetCandidateParam param) {
-    // TODO: implement getCandidate
-    throw UnimplementedError();
+  Future<CandidateEntity?> getCandidate(GetCandidateParam param) async {
+    final Candidate? candidate = await _client.candidate.findFirst(
+        where: CandidateWhereInput(uuid: PrismaUnion.$2(param.uuid)));
+    if (candidate == null) {
+      return null;
+    }
+    return transform(candidate);
   }
 
   @override
@@ -49,5 +53,11 @@ class LocalCandidateDatasource implements ICandidateDatasourceRepository {
         voteCount: param.voteCount,
         uuid: param.uuid,
         user: param.user);
+  }
+
+  @override
+  Future<List<CandidateEntity>> getAllCandidate() async {
+    final candidates = await _client.candidate.findMany();
+    return candidates.map((e) => transform(e)).toList();
   }
 }
