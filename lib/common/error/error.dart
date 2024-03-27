@@ -39,3 +39,10 @@ class UserAlreadyExistError extends GenericServerError {
             devMessage: "User already exist in the db",
             userFriendlyMessage: "L'utilisateur existe deja");
 }
+
+class InvalidTokenError extends GenericServerError {
+  InvalidTokenError()
+      : super(
+            devMessage: "Invalid token given",
+            userFriendlyMessage: "Token invalid");
+}

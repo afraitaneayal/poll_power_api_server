@@ -1,6 +1,8 @@
 import 'package:openapi_base/openapi_base.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
 
+import '../../../common/error/error.dart';
+
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
 
@@ -13,9 +15,8 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   }
 
   @override
-  Future<LoginUserResponse> loginUser(UserLoginRequest body) {
-    // TODO: implement loginUser
-    throw UnimplementedError();
+  Future<LoginUserResponse> loginUser(UserLoginRequest body) async {
+    return LoginUserResponse.response500(InvalidTokenError().getError());
   }
 
   @override
