@@ -18,9 +18,29 @@ model User {
   uuid String @id @db.VarChar(40)
   firstName String @db.VarChar(25)
   lastName String @db.VarChar(40)
-  email String 
+  email String @db.VarChar(50)
   password String
   image String
   grade String @db.VarChar(20)
   areaOfStudy String @db.VarChar(20)
+  candidate Candidate?
+  vote Vote?
 }
+
+model Candidate {
+  uuid String @id @db.VarChar(40)
+  slogan String @db.VarChar(100)
+  speech String  @db.VarChar(255)
+  user User @relation(fields: [user_uuid], references: [uuid])
+  user_uuid String @unique
+  vote Vote?
+}
+
+model Vote {
+  uuid String @id @db.VarChar(40)
+  user User @relation(fields: [user_uuid], references: [uuid])
+  user_uuid String @unique
+  candidate Candidate @relation(fields: [candidate_uuid], references: [uuid])
+  candidate_uuid String @unique
+  voted_at DateTime @default(now())
+} 
