@@ -14,39 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Candidate _$CandidateFromJson(Map<String, dynamic> json) {
-  return _Candidate.fromJson(json);
+CandidateEntity _$CandidateEntityFromJson(Map<String, dynamic> json) {
+  return _CandidateEntity.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Candidate {
+mixin _$CandidateEntity {
   String get slogan => throw _privateConstructorUsedError;
   String get speech => throw _privateConstructorUsedError;
   String get voteCount => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
+  UserEntity get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CandidateCopyWith<Candidate> get copyWith =>
+  $CandidateEntityCopyWith<CandidateEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CandidateCopyWith<$Res> {
-  factory $CandidateCopyWith(Candidate value, $Res Function(Candidate) then) =
-      _$CandidateCopyWithImpl<$Res, Candidate>;
+abstract class $CandidateEntityCopyWith<$Res> {
+  factory $CandidateEntityCopyWith(
+          CandidateEntity value, $Res Function(CandidateEntity) then) =
+      _$CandidateEntityCopyWithImpl<$Res, CandidateEntity>;
   @useResult
   $Res call(
-      {String slogan, String speech, String voteCount, String uuid, User user});
+      {String slogan,
+      String speech,
+      String voteCount,
+      String uuid,
+      UserEntity user});
 
-  $UserCopyWith<$Res> get user;
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class _$CandidateCopyWithImpl<$Res, $Val extends Candidate>
-    implements $CandidateCopyWith<$Res> {
-  _$CandidateCopyWithImpl(this._value, this._then);
+class _$CandidateEntityCopyWithImpl<$Res, $Val extends CandidateEntity>
+    implements $CandidateEntityCopyWith<$Res> {
+  _$CandidateEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -82,40 +87,44 @@ class _$CandidateCopyWithImpl<$Res, $Val extends Candidate>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserEntity,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
+  $UserEntityCopyWith<$Res> get user {
+    return $UserEntityCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$CandidateImplCopyWith<$Res>
-    implements $CandidateCopyWith<$Res> {
-  factory _$$CandidateImplCopyWith(
-          _$CandidateImpl value, $Res Function(_$CandidateImpl) then) =
-      __$$CandidateImplCopyWithImpl<$Res>;
+abstract class _$$CandidateEntityImplCopyWith<$Res>
+    implements $CandidateEntityCopyWith<$Res> {
+  factory _$$CandidateEntityImplCopyWith(_$CandidateEntityImpl value,
+          $Res Function(_$CandidateEntityImpl) then) =
+      __$$CandidateEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String slogan, String speech, String voteCount, String uuid, User user});
+      {String slogan,
+      String speech,
+      String voteCount,
+      String uuid,
+      UserEntity user});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$CandidateImplCopyWithImpl<$Res>
-    extends _$CandidateCopyWithImpl<$Res, _$CandidateImpl>
-    implements _$$CandidateImplCopyWith<$Res> {
-  __$$CandidateImplCopyWithImpl(
-      _$CandidateImpl _value, $Res Function(_$CandidateImpl) _then)
+class __$$CandidateEntityImplCopyWithImpl<$Res>
+    extends _$CandidateEntityCopyWithImpl<$Res, _$CandidateEntityImpl>
+    implements _$$CandidateEntityImplCopyWith<$Res> {
+  __$$CandidateEntityImplCopyWithImpl(
+      _$CandidateEntityImpl _value, $Res Function(_$CandidateEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +136,7 @@ class __$$CandidateImplCopyWithImpl<$Res>
     Object? uuid = null,
     Object? user = null,
   }) {
-    return _then(_$CandidateImpl(
+    return _then(_$CandidateEntityImpl(
       slogan: null == slogan
           ? _value.slogan
           : slogan // ignore: cast_nullable_to_non_nullable
@@ -147,23 +156,23 @@ class __$$CandidateImplCopyWithImpl<$Res>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserEntity,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CandidateImpl implements _Candidate {
-  const _$CandidateImpl(
+class _$CandidateEntityImpl implements _CandidateEntity {
+  const _$CandidateEntityImpl(
       {required this.slogan,
       required this.speech,
       required this.voteCount,
       required this.uuid,
       required this.user});
 
-  factory _$CandidateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CandidateImplFromJson(json);
+  factory _$CandidateEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CandidateEntityImplFromJson(json);
 
   @override
   final String slogan;
@@ -174,18 +183,18 @@ class _$CandidateImpl implements _Candidate {
   @override
   final String uuid;
   @override
-  final User user;
+  final UserEntity user;
 
   @override
   String toString() {
-    return 'Candidate(slogan: $slogan, speech: $speech, voteCount: $voteCount, uuid: $uuid, user: $user)';
+    return 'CandidateEntity(slogan: $slogan, speech: $speech, voteCount: $voteCount, uuid: $uuid, user: $user)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CandidateImpl &&
+            other is _$CandidateEntityImpl &&
             (identical(other.slogan, slogan) || other.slogan == slogan) &&
             (identical(other.speech, speech) || other.speech == speech) &&
             (identical(other.voteCount, voteCount) ||
@@ -202,27 +211,28 @@ class _$CandidateImpl implements _Candidate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CandidateImplCopyWith<_$CandidateImpl> get copyWith =>
-      __$$CandidateImplCopyWithImpl<_$CandidateImpl>(this, _$identity);
+  _$$CandidateEntityImplCopyWith<_$CandidateEntityImpl> get copyWith =>
+      __$$CandidateEntityImplCopyWithImpl<_$CandidateEntityImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CandidateImplToJson(
+    return _$$CandidateEntityImplToJson(
       this,
     );
   }
 }
 
-abstract class _Candidate implements Candidate {
-  const factory _Candidate(
+abstract class _CandidateEntity implements CandidateEntity {
+  const factory _CandidateEntity(
       {required final String slogan,
       required final String speech,
       required final String voteCount,
       required final String uuid,
-      required final User user}) = _$CandidateImpl;
+      required final UserEntity user}) = _$CandidateEntityImpl;
 
-  factory _Candidate.fromJson(Map<String, dynamic> json) =
-      _$CandidateImpl.fromJson;
+  factory _CandidateEntity.fromJson(Map<String, dynamic> json) =
+      _$CandidateEntityImpl.fromJson;
 
   @override
   String get slogan;
@@ -233,9 +243,9 @@ abstract class _Candidate implements Candidate {
   @override
   String get uuid;
   @override
-  User get user;
+  UserEntity get user;
   @override
   @JsonKey(ignore: true)
-  _$$CandidateImplCopyWith<_$CandidateImpl> get copyWith =>
+  _$$CandidateEntityImplCopyWith<_$CandidateEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -3,7 +3,7 @@ import 'package:poll_power_api_server/domain/params/candidate/get_candidate_para
 import '../../entities/candidate/candidate.dart';
 
 abstract class ICandidateRepository {
-  Future<Candidate> createCandidate(CreateCandidateParam param);
+  Future<CandidateEntity> createCandidate(CreateCandidateParam param);
 
-  Future<Candidate> getCandidate(GetCandidateParam param);
+  Future<CandidateEntity> getCandidate(GetCandidateParam param);
 }

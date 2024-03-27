@@ -6,16 +6,18 @@ part of 'candidate.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CandidateImpl _$$CandidateImplFromJson(Map<String, dynamic> json) =>
-    _$CandidateImpl(
+_$CandidateEntityImpl _$$CandidateEntityImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CandidateEntityImpl(
       slogan: json['slogan'] as String,
       speech: json['speech'] as String,
       voteCount: json['voteCount'] as String,
       uuid: json['uuid'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserEntity.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CandidateImplToJson(_$CandidateImpl instance) =>
+Map<String, dynamic> _$$CandidateEntityImplToJson(
+        _$CandidateEntityImpl instance) =>
     <String, dynamic>{
       'slogan': instance.slogan,
       'speech': instance.speech,

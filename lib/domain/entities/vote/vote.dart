@@ -4,13 +4,14 @@ part 'vote.freezed.dart';
 part 'vote.g.dart';
 
 @freezed
-class Vote with _$Vote {
-  const factory Vote({
+class VoteEntity with _$VoteEntity {
+  const factory VoteEntity({
     required String candidateId,
     required DateTime votedAt,
     required String userId,
     required String uuid,
-  }) = _Vote;
+  }) = _VoteEntity;
 
-  factory Vote.fromJson(Map<String, dynamic> json) => _$VoteFromJson(json);
+  factory VoteEntity.fromJson(Map<String, dynamic> json) =>
+      _$VoteEntityFromJson(json);
 }

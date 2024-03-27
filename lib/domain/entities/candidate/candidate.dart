@@ -6,15 +6,15 @@ part 'candidate.freezed.dart';
 part 'candidate.g.dart';
 
 @freezed
-class Candidate with _$Candidate {
-  const factory Candidate({
+class CandidateEntity with _$CandidateEntity {
+  const factory CandidateEntity({
     required String slogan,
     required String speech,
     required String voteCount,
     required String uuid,
-    required User user,
-  }) = _Candidate;
+    required UserEntity user,
+  }) = _CandidateEntity;
 
-  factory Candidate.fromJson(Map<String, dynamic> json) =>
-      _$CandidateFromJson(json);
+  factory CandidateEntity.fromJson(Map<String, dynamic> json) =>
+      _$CandidateEntityFromJson(json);
 }

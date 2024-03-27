@@ -4,7 +4,7 @@ class CreateCandidateParam {
   final String uuid;
   final String slogan;
   final String speech;
-  final User user;
+  final UserEntity user;
   final int voteCount;
 
   CreateCandidateParam(

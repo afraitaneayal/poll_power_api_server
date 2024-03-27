@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Vote _$VoteFromJson(Map<String, dynamic> json) {
-  return _Vote.fromJson(json);
+VoteEntity _$VoteEntityFromJson(Map<String, dynamic> json) {
+  return _VoteEntity.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Vote {
+mixin _$VoteEntity {
   String get candidateId => throw _privateConstructorUsedError;
   DateTime get votedAt => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
@@ -27,21 +27,23 @@ mixin _$Vote {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $VoteCopyWith<Vote> get copyWith => throw _privateConstructorUsedError;
+  $VoteEntityCopyWith<VoteEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $VoteCopyWith<$Res> {
-  factory $VoteCopyWith(Vote value, $Res Function(Vote) then) =
-      _$VoteCopyWithImpl<$Res, Vote>;
+abstract class $VoteEntityCopyWith<$Res> {
+  factory $VoteEntityCopyWith(
+          VoteEntity value, $Res Function(VoteEntity) then) =
+      _$VoteEntityCopyWithImpl<$Res, VoteEntity>;
   @useResult
   $Res call({String candidateId, DateTime votedAt, String userId, String uuid});
 }
 
 /// @nodoc
-class _$VoteCopyWithImpl<$Res, $Val extends Vote>
-    implements $VoteCopyWith<$Res> {
-  _$VoteCopyWithImpl(this._value, this._then);
+class _$VoteEntityCopyWithImpl<$Res, $Val extends VoteEntity>
+    implements $VoteEntityCopyWith<$Res> {
+  _$VoteEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -78,20 +80,22 @@ class _$VoteCopyWithImpl<$Res, $Val extends Vote>
 }
 
 /// @nodoc
-abstract class _$$VoteImplCopyWith<$Res> implements $VoteCopyWith<$Res> {
-  factory _$$VoteImplCopyWith(
-          _$VoteImpl value, $Res Function(_$VoteImpl) then) =
-      __$$VoteImplCopyWithImpl<$Res>;
+abstract class _$$VoteEntityImplCopyWith<$Res>
+    implements $VoteEntityCopyWith<$Res> {
+  factory _$$VoteEntityImplCopyWith(
+          _$VoteEntityImpl value, $Res Function(_$VoteEntityImpl) then) =
+      __$$VoteEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String candidateId, DateTime votedAt, String userId, String uuid});
 }
 
 /// @nodoc
-class __$$VoteImplCopyWithImpl<$Res>
-    extends _$VoteCopyWithImpl<$Res, _$VoteImpl>
-    implements _$$VoteImplCopyWith<$Res> {
-  __$$VoteImplCopyWithImpl(_$VoteImpl _value, $Res Function(_$VoteImpl) _then)
+class __$$VoteEntityImplCopyWithImpl<$Res>
+    extends _$VoteEntityCopyWithImpl<$Res, _$VoteEntityImpl>
+    implements _$$VoteEntityImplCopyWith<$Res> {
+  __$$VoteEntityImplCopyWithImpl(
+      _$VoteEntityImpl _value, $Res Function(_$VoteEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +106,7 @@ class __$$VoteImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? uuid = null,
   }) {
-    return _then(_$VoteImpl(
+    return _then(_$VoteEntityImpl(
       candidateId: null == candidateId
           ? _value.candidateId
           : candidateId // ignore: cast_nullable_to_non_nullable
@@ -125,15 +129,15 @@ class __$$VoteImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$VoteImpl implements _Vote {
-  const _$VoteImpl(
+class _$VoteEntityImpl implements _VoteEntity {
+  const _$VoteEntityImpl(
       {required this.candidateId,
       required this.votedAt,
       required this.userId,
       required this.uuid});
 
-  factory _$VoteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VoteImplFromJson(json);
+  factory _$VoteEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VoteEntityImplFromJson(json);
 
   @override
   final String candidateId;
@@ -146,14 +150,14 @@ class _$VoteImpl implements _Vote {
 
   @override
   String toString() {
-    return 'Vote(candidateId: $candidateId, votedAt: $votedAt, userId: $userId, uuid: $uuid)';
+    return 'VoteEntity(candidateId: $candidateId, votedAt: $votedAt, userId: $userId, uuid: $uuid)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VoteImpl &&
+            other is _$VoteEntityImpl &&
             (identical(other.candidateId, candidateId) ||
                 other.candidateId == candidateId) &&
             (identical(other.votedAt, votedAt) || other.votedAt == votedAt) &&
@@ -169,25 +173,26 @@ class _$VoteImpl implements _Vote {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$VoteImplCopyWith<_$VoteImpl> get copyWith =>
-      __$$VoteImplCopyWithImpl<_$VoteImpl>(this, _$identity);
+  _$$VoteEntityImplCopyWith<_$VoteEntityImpl> get copyWith =>
+      __$$VoteEntityImplCopyWithImpl<_$VoteEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$VoteImplToJson(
+    return _$$VoteEntityImplToJson(
       this,
     );
   }
 }
 
-abstract class _Vote implements Vote {
-  const factory _Vote(
+abstract class _VoteEntity implements VoteEntity {
+  const factory _VoteEntity(
       {required final String candidateId,
       required final DateTime votedAt,
       required final String userId,
-      required final String uuid}) = _$VoteImpl;
+      required final String uuid}) = _$VoteEntityImpl;
 
-  factory _Vote.fromJson(Map<String, dynamic> json) = _$VoteImpl.fromJson;
+  factory _VoteEntity.fromJson(Map<String, dynamic> json) =
+      _$VoteEntityImpl.fromJson;
 
   @override
   String get candidateId;
@@ -199,6 +204,6 @@ abstract class _Vote implements Vote {
   String get uuid;
   @override
   @JsonKey(ignore: true)
-  _$$VoteImplCopyWith<_$VoteImpl> get copyWith =>
+  _$$VoteEntityImplCopyWith<_$VoteEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
