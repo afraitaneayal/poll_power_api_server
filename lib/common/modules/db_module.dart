@@ -3,7 +3,7 @@ import 'package:poll_power_api_server/gen/prisma/client.dart';
 
 @module
 abstract class DbModule {
-  @Named('db')
+  @Named('prisma')
   @Singleton()
   PrismaClient get prismaClient => PrismaClient();
 }

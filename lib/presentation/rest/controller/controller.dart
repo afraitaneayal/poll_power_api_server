@@ -2,6 +2,7 @@ import 'package:openapi_base/openapi_base.dart';
 import 'package:poll_power_api_server/common/helpers/bearer_extractor/bearer_extractor.dart';
 import 'package:poll_power_api_server/common/helpers/controller_helper/controller_helper.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
+import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import 'package:poll_power_api_server/domain/params/vote/create_vote_param.dart';
 import 'package:poll_power_api_server/presentation/usecases.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
@@ -42,7 +43,15 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
 
   @override
   Future<LoginUserResponse> loginUser(UserLoginRequest body) async {
-    return LoginUserResponse.response500(invalidToken);
+    final LogUserParam param = LogUserParam(body.email!, body.password!);
+    final result = await _usecases.logUserUsecase.trigger(param);
+    return result.fold((l) {
+      return (l is InvalidCredentialsError)
+          ? LoginUserResponse.response500(l.getAPIError())
+          : LoginUserResponse.response500(internalServerError(l));
+    }, (r) {
+      return LoginUserResponse.response200(JWTresponse.fromJson(r.toJson()));
+    });
   }
 
   @override
@@ -54,27 +63,24 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   Future<VoteCandidateResponse> voteCandidate(VotingRequest body) async {
     try {
       final String? bearer = BearerExtractor.extract(_request);
+
       if (bearer == null) {
-        return VoteCandidateResponse.response400(invalidToken);
+        return VoteCandidateResponse.response401(invalidToken);
       }
-      final isTokenValid = await TokenHelperImpl().verifyToken();
-      return await isTokenValid.fold((l) {
-        return VoteCandidateResponse.response400(
-            InternalServerErrorWhileProccessing(l.toString()).getAPIError());
-      }, (r) async {
-        if (r) {
-          final param = CreateVoteParam(body.candidateId, body.userId);
-          final result = await _usecases.createVoteUsecase.trigger(param);
-          return result.fold((l) {
-            return VoteCandidateResponse.response500(internalServerError(l));
-          }, (r) {
-            return VoteCandidateResponse.response200();
-          });
-        } else {
-          return VoteCandidateResponse.response401(
-              UnauthorizedUserError("").getAPIError());
-        }
-      });
+
+      final isTokenValid = await TokenHelperImpl().verifyToken(bearer);
+      if (!isTokenValid) {
+        return VoteCandidateResponse.response401(
+            UnauthorizedUserError("").getAPIError());
+      } else {
+        final param = CreateVoteParam(body.candidateId, body.userId);
+        final result = await _usecases.createVoteUsecase.trigger(param);
+        return result.fold((l) {
+          return VoteCandidateResponse.response500(internalServerError(l));
+        }, (r) {
+          return VoteCandidateResponse.response200();
+        });
+      }
     } catch (e) {
       return VoteCandidateResponse.response400(
           BadRequestError(e.toString()).getAPIError());

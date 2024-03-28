@@ -9,10 +9,10 @@ import 'package:poll_power_api_server/gen/prisma/model.dart';
 import 'package:poll_power_api_server/gen/prisma/prisma.dart';
 
 @LazySingleton(as: ICandidateDatasourceRepository)
-class LocalCandidateDatasource implements ICandidateDatasourceRepository {
+class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   final PrismaClient _client;
 
-  LocalCandidateDatasource(@Named('db') this._client);
+  LocalCandidateDatasourceImp(@Named('prisma') this._client);
 
   @override
   Future<CandidateEntity> createCandidate(CreateCandidateParam param) async {

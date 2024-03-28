@@ -71,6 +71,19 @@ class InvalidTokenError extends GenericServerError {
   }
 }
 
+class InvalidCredentialsError extends GenericServerError {
+  final String stackTrace;
+  InvalidCredentialsError(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (stackTrace.isEmpty) ? "Invalid password" : stackTrace,
+            userFriendlyMessage: "Invalid email or password"));
+  }
+}
+
 class InternalServerErrorWhileProccessing extends GenericServerError {
   final String stackTrace;
   InternalServerErrorWhileProccessing(this.stackTrace) : super(stackTrace);

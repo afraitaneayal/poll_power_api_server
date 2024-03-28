@@ -1,20 +1,20 @@
-import 'package:dartz/dartz.dart';
-import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class TokenHelper {
-  Future<Either<ServerError, String>> generateToken(String key);
-  Future<Either<ServerError, bool>> verifyToken();
+  Future<String> generateToken();
+  Future<bool> verifyToken(String token);
 }
 
+@LazySingleton(as: TokenHelper)
 class TokenHelperImpl implements TokenHelper {
   @override
-  Future<Either<ServerError, String>> generateToken(String key) {
+  Future<String> generateToken() {
     // TODO: implement generateToken
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<ServerError, bool>> verifyToken() {
+  Future<bool> verifyToken(String token) {
     // TODO: implement verifyToken
     throw UnimplementedError();
   }
