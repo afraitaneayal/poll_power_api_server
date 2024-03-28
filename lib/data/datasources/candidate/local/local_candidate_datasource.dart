@@ -18,9 +18,11 @@ class LocalCandidateDatasource implements ICandidateDatasourceRepository {
   Future<CandidateEntity> createCandidate(CreateCandidateParam param) async {
     final Candidate candidate = await _client.candidate.create(
         data: PrismaUnion.$1(CandidateCreateInput(
-            uuid: param.uuid,
+
+            /// TODO generate uuid
+            uuid: "",
             slogan: param.slogan,
-            speech: param.speech,
+            speech: param.speech ?? "",
             user: UserCreateNestedOneWithoutCandidateInput(
                 create: PrismaUnion.$1(UserCreateWithoutCandidateInput(
                     uuid: param.user.uuid,

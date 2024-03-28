@@ -34,6 +34,18 @@ class GenericServerError extends ServerError {
   }
 }
 
+class BadRequestError extends GenericServerError {
+  BadRequestError(super.error);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (error.isEmpty) ? "Bad request" : error,
+            userFriendlyMessage: "Bad request"));
+  }
+}
+
 class UserAlreadyExistError extends GenericServerError {
   final String stackTrace;
   UserAlreadyExistError(this.stackTrace) : super(stackTrace);
@@ -69,5 +81,31 @@ class InternalServerErrorWhileProccessing extends GenericServerError {
         error: APIErrorContent(
             devMessage: stackTrace,
             userFriendlyMessage: "Something went wrong with the server"));
+  }
+}
+
+class UnauthorizedUserError extends GenericServerError {
+  UnauthorizedUserError(super.error);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (error.isEmpty) ? "" : error,
+            userFriendlyMessage: "Unauthorized"));
+  }
+}
+
+class ErrorWhileSigningUser extends GenericServerError {
+  final String stackTrace;
+  ErrorWhileSigningUser(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: stackTrace,
+            userFriendlyMessage:
+                "The signing process failed please try again"));
   }
 }
