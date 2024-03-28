@@ -8,49 +8,66 @@ class ErrorCatcher {
       return right(result);
     } catch (e) {
       final error = e.toString();
-      return left(GenericServerError(
-          devMessage: error, userFriendlyMessage: "Une erreur c'est produite"));
+      return left(GenericServerError(error));
     }
   }
 }
 
 abstract class ServerError {
-  APIError getError();
+  String getError();
+}
+
+// Get API error
+APIError getAPIError(String devMessage, String userFriendlyMessage) {
+  return APIError(
+      error: APIErrorContent(
+          devMessage: devMessage, userFriendlyMessage: userFriendlyMessage));
 }
 
 class GenericServerError extends ServerError {
-  final String devMessage;
-  final String userFriendlyMessage;
-
-  GenericServerError(
-      {required this.devMessage, required this.userFriendlyMessage});
+  final String error;
+  GenericServerError(this.error);
 
   @override
-  APIError getError() {
-    return APIError(
-        error: APIErrorContent(
-            devMessage: devMessage, userFriendlyMessage: userFriendlyMessage));
+  String getError() {
+    return error;
   }
 }
 
 class UserAlreadyExistError extends GenericServerError {
-  UserAlreadyExistError()
-      : super(
-            devMessage: "User already exist in the db",
-            userFriendlyMessage: "L'utilisateur existe deja");
+  final String stackTrace;
+  UserAlreadyExistError(this.stackTrace) : super(stackTrace);
+
+// Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: stackTrace,
+            userFriendlyMessage: "User already exist in the system"));
+  }
 }
 
 class InvalidTokenError extends GenericServerError {
-  InvalidTokenError()
-      : super(
-            devMessage: "Invalid token given",
-            userFriendlyMessage: "Token invalid");
+  final String stackTrace;
+  InvalidTokenError(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: stackTrace, userFriendlyMessage: "Invalid token"));
+  }
 }
 
 class InternalServerErrorWhileProccessing extends GenericServerError {
-  InternalServerErrorWhileProccessing()
-      : super(
-            devMessage: "Internal server error",
-            userFriendlyMessage:
-                "Une erreur c'est produite sur le serveur veuiller reesayer");
+  final String stackTrace;
+  InternalServerErrorWhileProccessing(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: stackTrace,
+            userFriendlyMessage: "Something went wrong with the server"));
+  }
 }

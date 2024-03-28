@@ -4,6 +4,8 @@ import 'package:poll_power_api_server/presentation/usecases.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
 import '../../../common/error/error.dart';
 
+final APIError invalidToken = InvalidTokenError("Invalid Token").getAPIError();
+
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
   final Usecases _usecases;
@@ -14,14 +16,14 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   Future<GetCandidatesResponse> getCandidates() async {
     final String? bearer = BearerExtractor.extract(_request);
     if (bearer == null) {
-      return GetCandidatesResponse.response401(InvalidTokenError().getError());
+      return GetCandidatesResponse.response401(invalidToken);
     }
 
     final candidatesResult =
         await _usecases.getAllCandidateUsecase.trigger(null);
     return candidatesResult.fold((l) {
       return GetCandidatesResponse.response500(
-          InternalServerErrorWhileProccessing().getError());
+          InternalServerErrorWhileProccessing(l.getError()).getAPIError());
     }, (r) {
       if (r == null || r.isEmpty) {
         return GetCandidatesResponse.response200([]);
@@ -34,7 +36,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
 
   @override
   Future<LoginUserResponse> loginUser(UserLoginRequest body) async {
-    return LoginUserResponse.response500(InvalidTokenError().getError());
+    return LoginUserResponse.response500(invalidToken);
   }
 
   @override
@@ -56,7 +58,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   }
 
   @override
-  Future<SignUpCandidateResponse> signUpCandidate(Candidate body) {
+  Future<SignUpCandidateResponse> signUpCandidate(Candidate body) async {
     // TODO: implement signUpCandidate
     throw UnimplementedError();
   }
