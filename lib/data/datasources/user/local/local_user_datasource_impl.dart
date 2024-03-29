@@ -25,12 +25,14 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   Future<UserEntity> createUser(CreateUserParam param) async {
     final userResult = await _client.user.create(
         data: PrismaUnion.$1(UserCreateInput(
-            uuid: "",
+            uuid: "1D",
             firstName: param.firstName,
             lastName: param.lastName,
             email: param.email,
             password: param.password,
-            image: param.image,
+            image: (param.image == null)
+                ? PrismaUnion.$2(PrismaNull())
+                : PrismaUnion.$1(param.image!),
             grade: param.grade,
             areaOfStudy: param.areaOfStudy)));
 
@@ -50,14 +52,17 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
     final user = await _client.user
         .findFirst(where: UserWhereInput(email: PrismaUnion.$2(param.email)));
 
-    if (user != null &&
-        PasswordHelper.verifyPassword(user.password, param.password)) {
-      return right(JwtObject(
-          refresh: await locator.get<TokenHelper>().generateToken(),
-          key: "key",
-          token: await locator.get<TokenHelper>().generateToken()));
+    if (user != null) {
+      final isValid =
+          PasswordHelper.verifyPassword(user.password, param.password);
+      return isValid
+          ? right(JwtObject(
+              refresh: await locator.get<TokenHelper>().generateToken(),
+              key: "key",
+              token: await locator.get<TokenHelper>().generateToken()))
+          : left(InvalidCredentialsError(""));
     } else {
-      return left(InvalidCredentialsError(""));
+      return left(UserNotFoundError(""));
     }
   }
 

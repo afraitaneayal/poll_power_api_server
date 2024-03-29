@@ -8,6 +8,7 @@ class ErrorCatcher {
       return right(result);
     } catch (e) {
       final error = e.toString();
+      print(error);
       return left(GenericServerError(error));
     }
   }
@@ -104,7 +105,7 @@ class UnauthorizedUserError extends GenericServerError {
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
-            devMessage: (error.isEmpty) ? "" : error,
+            devMessage: (error.isEmpty) ? "Unauthorized" : error,
             userFriendlyMessage: "Unauthorized"));
   }
 }
@@ -120,5 +121,20 @@ class ErrorWhileSigningUser extends GenericServerError {
             devMessage: stackTrace,
             userFriendlyMessage:
                 "The signing process failed please try again"));
+  }
+}
+
+class UserNotFoundError extends GenericServerError {
+  final String stackTrace;
+  UserNotFoundError(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (stackTrace.isEmpty)
+                ? "User not found in the system"
+                : stackTrace,
+            userFriendlyMessage: "User not found"));
   }
 }

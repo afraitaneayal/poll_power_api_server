@@ -11,11 +11,11 @@ _$UserEntityImpl _$$UserEntityImplFromJson(Map<String, dynamic> json) =>
       uuid: json['uuid'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
+      firstName: json['first_name'] as String,
+      lastName: json['last_name'] as String,
       grade: json['grade'] as String,
-      areaOfStudy: json['areaOfStudy'] as String,
-      image: json['image'] as String,
+      areaOfStudy: json['area_of_study'] as String,
+      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>
@@ -23,9 +23,9 @@ Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>
       'uuid': instance.uuid,
       'email': instance.email,
       'password': instance.password,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'grade': instance.grade,
-      'areaOfStudy': instance.areaOfStudy,
+      'area_of_study': instance.areaOfStudy,
       'image': instance.image,
     };

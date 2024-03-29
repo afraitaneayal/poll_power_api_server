@@ -30,7 +30,9 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
                     lastName: param.user.lastName,
                     email: param.user.email,
                     password: param.user.password,
-                    image: param.user.image,
+                    image: (param.user.image == null)
+                        ? PrismaUnion.$2(PrismaNull())
+                        : PrismaUnion.$1(param.user.image!),
                     grade: param.user.grade,
                     areaOfStudy: param.user.areaOfStudy))))));
 

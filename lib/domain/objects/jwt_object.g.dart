@@ -15,7 +15,7 @@ _$JwtObjectImpl _$$JwtObjectImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$JwtObjectImplToJson(_$JwtObjectImpl instance) =>
     <String, dynamic>{
-      'refresh': instance.refresh,
+      'refresh_token': instance.refresh,
       'token': instance.token,
       'key': instance.key,
     };

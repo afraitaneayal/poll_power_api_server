@@ -27,7 +27,7 @@ mixin _$UserEntity {
   String get lastName => throw _privateConstructorUsedError;
   String get grade => throw _privateConstructorUsedError;
   String get areaOfStudy => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ abstract class $UserEntityCopyWith<$Res> {
       String lastName,
       String grade,
       String areaOfStudy,
-      String image});
+      String? image});
 }
 
 /// @nodoc
@@ -72,7 +72,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? lastName = null,
     Object? grade = null,
     Object? areaOfStudy = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       uuid: null == uuid
@@ -103,10 +103,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.areaOfStudy
           : areaOfStudy // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -127,7 +127,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       String lastName,
       String grade,
       String areaOfStudy,
-      String image});
+      String? image});
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? grade = null,
     Object? areaOfStudy = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_$UserEntityImpl(
       uuid: null == uuid
@@ -179,10 +179,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.areaOfStudy
           : areaOfStudy // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -218,7 +218,7 @@ class _$UserEntityImpl implements _UserEntity {
   @override
   final String areaOfStudy;
   @override
-  final String image;
+  final String? image;
 
   @override
   String toString() {
@@ -272,7 +272,7 @@ abstract class _UserEntity implements UserEntity {
       required final String lastName,
       required final String grade,
       required final String areaOfStudy,
-      required final String image}) = _$UserEntityImpl;
+      required final String? image}) = _$UserEntityImpl;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$UserEntityImpl.fromJson;
@@ -292,7 +292,7 @@ abstract class _UserEntity implements UserEntity {
   @override
   String get areaOfStudy;
   @override
-  String get image;
+  String? get image;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>

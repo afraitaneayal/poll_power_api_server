@@ -7,5 +7,6 @@ Future<void> init() async {
 
 void main(List<String> args) async {
   await init();
+  // await startGRPCServer();
   await startRestServer();
 }

@@ -20,7 +20,7 @@ model User {
   lastName String @db.VarChar(40)
   email String @db.VarChar(50)
   password String
-  image String
+  image String?
   grade String @db.VarChar(20)
   areaOfStudy String @db.VarChar(20)
   candidate Candidate?

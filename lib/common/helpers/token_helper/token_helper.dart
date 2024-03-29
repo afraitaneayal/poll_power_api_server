@@ -8,14 +8,14 @@ abstract class TokenHelper {
 @LazySingleton(as: TokenHelper)
 class TokenHelperImpl implements TokenHelper {
   @override
-  Future<String> generateToken() {
+  Future<String> generateToken() async {
     // TODO: implement generateToken
-    throw UnimplementedError();
+    return "yayahc";
   }
 
   @override
-  Future<bool> verifyToken(String token) {
+  Future<bool> verifyToken(String token) async {
     // TODO: implement verifyToken
-    throw UnimplementedError();
+    return true;
   }
 }

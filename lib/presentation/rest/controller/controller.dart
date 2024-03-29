@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:openapi_base/openapi_base.dart';
 import 'package:poll_power_api_server/common/helpers/bearer_extractor/bearer_extractor.dart';
 import 'package:poll_power_api_server/common/helpers/controller_helper/controller_helper.dart';
@@ -13,6 +15,7 @@ APIError internalServerError(ServerError l) =>
 final APIError invalidToken = InvalidTokenError("Invalid Token").getAPIError();
 APIError errorSigningCandidate(ServerError l) =>
     ErrorWhileSigningUser(l.getError()).getAPIError();
+final userNotFound = UserNotFoundError("").getAPIError();
 
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
@@ -43,15 +46,25 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
 
   @override
   Future<LoginUserResponse> loginUser(UserLoginRequest body) async {
-    final LogUserParam param = LogUserParam(body.email!, body.password!);
-    final result = await _usecases.logUserUsecase.trigger(param);
-    return result.fold((l) {
-      return (l is InvalidCredentialsError)
-          ? LoginUserResponse.response500(l.getAPIError())
-          : LoginUserResponse.response500(internalServerError(l));
-    }, (r) {
-      return LoginUserResponse.response200(JWTresponse.fromJson(r.toJson()));
-    });
+    try {
+      final LogUserParam param = LogUserParam(body.email!, body.password!);
+      final result = await _usecases.logUserUsecase.trigger(param);
+      return result.fold((l) {
+        if (l is InvalidCredentialsError) {
+          return LoginUserResponse.response500(l.getAPIError());
+        } else if (l is UserNotFoundError) {
+          return LoginUserResponse.response500(userNotFound);
+        } else {
+          return LoginUserResponse.response500(internalServerError(l));
+        }
+      }, (r) {
+        return LoginUserResponse.response200(JWTresponse.fromJson(r.toJson()));
+      });
+    } catch (e, stackTrace) {
+      print(e.toString());
+      return LoginUserResponse.response500(
+          BadRequestError(stackTrace.toString()).getAPIError());
+    }
   }
 
   @override
@@ -81,9 +94,10 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
           return VoteCandidateResponse.response200();
         });
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print(e.toString());
       return VoteCandidateResponse.response400(
-          BadRequestError(e.toString()).getAPIError());
+          BadRequestError(stackTrace.toString()).getAPIError());
     }
   }
 
@@ -104,9 +118,10 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
         return SignUpCandidateResponse.response201(
             Candidate.fromJson(r.toJson()));
       });
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print(e.toString());
       return SignUpCandidateResponse.response400(
-          BadRequestError(e.toString()).getAPIError());
+          BadRequestError(stackTrace.toString()).getAPIError());
     }
   }
 
@@ -118,11 +133,13 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       return await result.fold((l) {
         return SignUpUserResponse.response500(errorSigningCandidate(l));
       }, (r) {
+        print(r.toJson());
         return SignUpUserResponse.response201(User.fromJson(r.toJson()));
       });
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print(e.toString());
       return SignUpUserResponse.response400(
-          BadRequestError(e.toString()).getAPIError());
+          BadRequestError(stackTrace.toString()).getAPIError());
     }
   }
 }
