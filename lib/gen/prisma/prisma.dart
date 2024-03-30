@@ -112,118 +112,6 @@ class StringFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class NestedStringNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedStringNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.contains,
-    this.startsWith,
-    this.endsWith,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i1.Reference<String>, _i1.PrismaNull>>? equals;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? contains;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? startsWith;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? endsWith;
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i2.NestedStringNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'contains': contains,
-        'startsWith': startsWith,
-        'endsWith': endsWith,
-        'not': not,
-      };
-}
-
-class StringNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const StringNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.contains,
-    this.startsWith,
-    this.endsWith,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i1.Reference<String>, _i1.PrismaNull>>? equals;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? contains;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? startsWith;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? endsWith;
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i2.NestedStringNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'contains': contains,
-        'startsWith': startsWith,
-        'endsWith': endsWith,
-        'not': not,
-      };
-}
-
 class UserRelationFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserRelationFilter({
     this.$is,
@@ -507,8 +395,7 @@ class UserWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? password;
 
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<_i2.StringFilter, String>? image;
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? grade;
 
@@ -572,8 +459,7 @@ class UserWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? password;
 
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<_i2.StringFilter, String>? image;
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? grade;
 
@@ -893,33 +779,6 @@ enum SortOrder implements _i1.PrismaEnum {
   final String name;
 }
 
-enum NullsOrder implements _i1.PrismaEnum {
-  first._('first'),
-  last._('last');
-
-  const NullsOrder._(this.name);
-
-  @override
-  final String name;
-}
-
-class SortOrderInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const SortOrderInput({
-    required this.sort,
-    this.nulls,
-  });
-
-  final _i2.SortOrder sort;
-
-  final _i2.NullsOrder? nulls;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'sort': sort,
-        'nulls': nulls,
-      };
-}
-
 class VoteOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const VoteOrderByWithRelationInput({
@@ -1013,7 +872,7 @@ class UserOrderByWithRelationInput
 
   final _i2.SortOrder? password;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? image;
+  final _i2.SortOrder? image;
 
   final _i2.SortOrder? grade;
 
@@ -1068,7 +927,7 @@ class UserCreateWithoutVoteInput
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.candidate,
@@ -1084,7 +943,7 @@ class UserCreateWithoutVoteInput
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1344,7 +1203,7 @@ class UserUncheckedCreateWithoutVoteInput
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.candidate,
@@ -1360,7 +1219,7 @@ class UserUncheckedCreateWithoutVoteInput
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1526,7 +1385,7 @@ class UserCreateWithoutCandidateInput
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.vote,
@@ -1542,7 +1401,7 @@ class UserCreateWithoutCandidateInput
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1636,7 +1495,7 @@ class UserUncheckedCreateWithoutCandidateInput
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.vote,
@@ -1652,7 +1511,7 @@ class UserUncheckedCreateWithoutCandidateInput
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1862,7 +1721,7 @@ class UserCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.candidate,
@@ -1879,7 +1738,7 @@ class UserCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1912,7 +1771,7 @@ class UserUncheckedCreateInput
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
     this.candidate,
@@ -1929,7 +1788,7 @@ class UserUncheckedCreateInput
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -1970,7 +1829,7 @@ class UserCreateManyInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     required this.lastName,
     required this.email,
     required this.password,
-    this.image,
+    required this.image,
     required this.grade,
     required this.areaOfStudy,
   });
@@ -1985,7 +1844,7 @@ class UserCreateManyInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final String password;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? image;
+  final String image;
 
   final String grade;
 
@@ -2009,16 +1868,6 @@ class StringFieldUpdateOperationsInput
   const StringFieldUpdateOperationsInput({this.set});
 
   final String? set;
-
-  @override
-  Map<String, dynamic> toJson() => {'set': set};
-}
-
-class NullableStringFieldUpdateOperationsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NullableStringFieldUpdateOperationsInput({this.set});
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? set;
 
   @override
   Map<String, dynamic> toJson() => {'set': set};
@@ -2059,10 +1908,7 @@ class UserUpdateWithoutVoteInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -2281,10 +2127,7 @@ class UserUncheckedUpdateWithoutVoteInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -2590,10 +2433,7 @@ class UserUpdateWithoutCandidateInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -2726,10 +2566,7 @@ class UserUncheckedUpdateWithoutCandidateInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -3072,10 +2909,7 @@ class UserUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -3127,10 +2961,7 @@ class UserUncheckedUpdateInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -3180,10 +3011,7 @@ class UserUpdateManyMutationInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -3227,10 +3055,7 @@ class UserUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
 
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? image;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? grade;
 
@@ -3587,7 +3412,7 @@ class UserOrderByWithAggregationInput
 
   final _i2.SortOrder? password;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? image;
+  final _i2.SortOrder? image;
 
   final _i2.SortOrder? grade;
 
@@ -3788,191 +3613,6 @@ class StringWithAggregatesFilter
       };
 }
 
-class NestedIntNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedIntNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<int,
-      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-      };
-}
-
-class NestedStringNullableWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedStringNullableWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.contains,
-    this.startsWith,
-    this.endsWith,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i1.Reference<String>, _i1.PrismaNull>>? equals;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? contains;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? startsWith;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? endsWith;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NestedStringNullableWithAggregatesFilter,
-          _i1.PrismaNull>>? not;
-
-  final _i2.NestedIntNullableFilter? $count;
-
-  final _i2.NestedStringNullableFilter? $min;
-
-  final _i2.NestedStringNullableFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'contains': contains,
-        'startsWith': startsWith,
-        'endsWith': endsWith,
-        'not': not,
-        '_count': $count,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class StringNullableWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const StringNullableWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.contains,
-    this.startsWith,
-    this.endsWith,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<String,
-      _i1.PrismaUnion<_i1.Reference<String>, _i1.PrismaNull>>? equals;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<String>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? lte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gt;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? gte;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? contains;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? startsWith;
-
-  final _i1.PrismaUnion<String, _i1.Reference<String>>? endsWith;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NestedStringNullableWithAggregatesFilter,
-          _i1.PrismaNull>>? not;
-
-  final _i2.NestedIntNullableFilter? $count;
-
-  final _i2.NestedStringNullableFilter? $min;
-
-  final _i2.NestedStringNullableFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'contains': contains,
-        'startsWith': startsWith,
-        'endsWith': endsWith,
-        'not': not,
-        '_count': $count,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
 class UserScalarWhereWithAggregatesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserScalarWhereWithAggregatesInput({
@@ -4007,8 +3647,7 @@ class UserScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? password;
 
-  final _i1.PrismaUnion<_i2.StringNullableWithAggregatesFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? image;
+  final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? image;
 
   final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? grade;
 

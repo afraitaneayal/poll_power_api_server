@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:openapi_base/openapi_base.dart';
 import 'package:poll_power_api_server/common/helpers/bearer_extractor/bearer_extractor.dart';
 import 'package:poll_power_api_server/common/helpers/controller_helper/controller_helper.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
+import 'package:poll_power_api_server/di.dart';
 import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import 'package:poll_power_api_server/domain/params/vote/create_vote_param.dart';
 import 'package:poll_power_api_server/presentation/usecases.dart';
@@ -16,6 +15,7 @@ final APIError invalidToken = InvalidTokenError("Invalid Token").getAPIError();
 APIError errorSigningCandidate(ServerError l) =>
     ErrorWhileSigningUser(l.getError()).getAPIError();
 final userNotFound = UserNotFoundError("").getAPIError();
+final tokenNotFound = TokenNotFoundError("").getAPIError();
 
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
@@ -75,29 +75,35 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   @override
   Future<VoteCandidateResponse> voteCandidate(VotingRequest body) async {
     try {
+      // Basicaly the bearer contain the token so
       final String? bearer = BearerExtractor.extract(_request);
 
       if (bearer == null) {
-        return VoteCandidateResponse.response401(invalidToken);
+        return VoteCandidateResponse.response401(tokenNotFound);
       }
 
-      final isTokenValid = await TokenHelperImpl().verifyToken(bearer);
+      final isTokenValid = await locator.get<TokenHelper>().verifyToken(bearer);
       if (!isTokenValid) {
-        return VoteCandidateResponse.response401(
-            UnauthorizedUserError("").getAPIError());
+        return VoteCandidateResponse.response401(invalidToken);
       } else {
-        final param = CreateVoteParam(body.candidateId, body.userId);
-        final result = await _usecases.createVoteUsecase.trigger(param);
-        return result.fold((l) {
-          return VoteCandidateResponse.response500(internalServerError(l));
-        }, (r) {
-          return VoteCandidateResponse.response200();
-        });
+        final uuid = await locator.get<TokenHelper>().extractUid(bearer);
+        if (uuid == null || !isTokenValid) {
+          return VoteCandidateResponse.response401(invalidToken);
+        } else {
+          final param = CreateVoteParam(body.candidateId, uuid);
+          final result = await _usecases.createVoteUsecase.trigger(param);
+          return result.fold((l) {
+            return VoteCandidateResponse.response500(internalServerError(l));
+          }, (r) {
+            return VoteCandidateResponse.response200();
+          });
+        }
       }
     } catch (e, stackTrace) {
       print(e.toString());
-      return VoteCandidateResponse.response400(
-          BadRequestError(stackTrace.toString()).getAPIError());
+      return VoteCandidateResponse.response500(
+          InternalServerErrorWhileProccessing(stackTrace.toString())
+              .getAPIError());
     }
   }
 
@@ -128,6 +134,12 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   @override
   Future<SignUpUserResponse> signUpUser(User body) async {
     try {
+      if (body.email.isEmpty ||
+          body.password.isEmpty ||
+          body.firstName.isEmpty) {
+        return SignUpUserResponse.response400(
+            BadRequestError("").getAPIError());
+      }
       final param = ControllerHelper.transformUser(body);
       final result = await _usecases.createUserUsecase.trigger(param);
       return await result.fold((l) {

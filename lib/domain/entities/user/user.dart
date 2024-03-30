@@ -13,7 +13,7 @@ class UserEntity with _$UserEntity {
     required String lastName,
     required String grade,
     required String areaOfStudy,
-    required String? image,
+    required String image,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

@@ -10,7 +10,7 @@ class ControllerHelper {
   }
 
   static CreateUserParam transformUser(User body) {
-    return CreateUserParam(body.email, body.areaOfStudy, body.grade, body.image,
-        body.lastName, body.firstName, body.password);
+    return CreateUserParam(body.email, body.areaOfStudy, body.grade,
+        body.image ?? "", body.lastName, body.firstName, body.password);
   }
 }

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
 import 'package:poll_power_api_server/common/error/error.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
+import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/user/i_user_datasource_repository.dart';
 import 'package:poll_power_api_server/di.dart';
 import 'package:poll_power_api_server/domain/entities/user/user.dart';
@@ -18,21 +19,21 @@ import '../../../../common/helpers/password_helper/password_helper.dart';
 @LazySingleton(as: IUserDatasourceRepository)
 class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   final PrismaClient _client;
+  final String _key;
 
-  LocalUserDatasourceImpl(@Named('prisma') this._client);
+  LocalUserDatasourceImpl(
+      @Named('prisma') this._client, @Named('authKey') this._key);
 
   @override
   Future<UserEntity> createUser(CreateUserParam param) async {
     final userResult = await _client.user.create(
         data: PrismaUnion.$1(UserCreateInput(
-            uuid: "1D",
+            uuid: UuidHelper.generateUuidV1(),
             firstName: param.firstName,
             lastName: param.lastName,
             email: param.email,
             password: param.password,
-            image: (param.image == null)
-                ? PrismaUnion.$2(PrismaNull())
-                : PrismaUnion.$1(param.image!),
+            image: param.image,
             grade: param.grade,
             areaOfStudy: param.areaOfStudy)));
 
@@ -57,9 +58,11 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
           PasswordHelper.verifyPassword(user.password, param.password);
       return isValid
           ? right(JwtObject(
-              refresh: await locator.get<TokenHelper>().generateToken(),
-              key: "key",
-              token: await locator.get<TokenHelper>().generateToken()))
+              refresh:
+                  await locator.get<TokenHelper>().generateToken(user.uuid!),
+              key: _key,
+              token:
+                  await locator.get<TokenHelper>().generateToken(user.uuid!)))
           : left(InvalidCredentialsError(""));
     } else {
       return left(UserNotFoundError(""));

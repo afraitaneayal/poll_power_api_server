@@ -1412,7 +1412,7 @@ class PrismaClient {
     }
     final engine = _i4.BinaryEngine(
       schema:
-          '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "dart run orm"\n  output = "../lib/gen/prisma"\n}\n\ndatasource db {\n  provider = "mysql"\n  url      = env("DATABASE_URL")\n}\n\nmodel User {\n  uuid String @id @db.VarChar(40)\n  firstName String @db.VarChar(25)\n  lastName String @db.VarChar(40)\n  email String @db.VarChar(50)\n  password String\n  image String?\n  grade String @db.VarChar(20)\n  areaOfStudy String @db.VarChar(20)\n  candidate Candidate?\n  vote Vote?\n}\n\nmodel Candidate {\n  uuid String @id @db.VarChar(40)\n  slogan String @db.VarChar(100)\n  speech String  @db.VarChar(255)\n  user User @relation(fields: [user_uuid], references: [uuid])\n  user_uuid String @unique\n  vote Vote?\n}\n\nmodel Vote {\n  uuid String @id @db.VarChar(40)\n  user User @relation(fields: [user_uuid], references: [uuid])\n  user_uuid String @unique\n  candidate Candidate @relation(fields: [candidate_uuid], references: [uuid])\n  candidate_uuid String @unique\n  voted_at DateTime @default(now())\n} \n',
+          '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "dart run orm"\n  output = "../lib/gen/prisma"\n}\n\ndatasource db {\n  provider = "mysql"\n  url      = env("DATABASE_URL")\n}\n\nmodel User {\n  uuid String @id @db.VarChar(40)\n  firstName String @db.VarChar(25)\n  lastName String @db.VarChar(40)\n  email String @db.VarChar(50)\n  password String\n  image String\n  grade String @db.VarChar(20)\n  areaOfStudy String @db.VarChar(20)\n  candidate Candidate?\n  vote Vote?\n}\n\nmodel Candidate {\n  uuid String @id @db.VarChar(40)\n  slogan String @db.VarChar(100)\n  speech String  @db.VarChar(255)\n  user User @relation(fields: [user_uuid], references: [uuid])\n  user_uuid String @unique\n  vote Vote?\n}\n\nmodel Vote {\n  uuid String @id @db.VarChar(40)\n  user User @relation(fields: [user_uuid], references: [uuid])\n  user_uuid String @unique\n  candidate Candidate @relation(fields: [candidate_uuid], references: [uuid])\n  candidate_uuid String @unique\n  voted_at DateTime @default(now())\n} \n',
       datasources: datasources,
     );
     final metrics = _i1.MetricsClient(engine);
@@ -1506,7 +1506,7 @@ class PrismaClient {
             'name': 'image',
             'kind': 'scalar',
             'isList': false,
-            'isRequired': false,
+            'isRequired': true,
             'isUnique': false,
             'isId': false,
             'isReadOnly': false,

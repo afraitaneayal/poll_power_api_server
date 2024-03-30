@@ -35,6 +35,18 @@ class GenericServerError extends ServerError {
   }
 }
 
+class TokenNotFoundError extends GenericServerError {
+  TokenNotFoundError(super.error);
+
+  // Get API error
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (error.isEmpty) ? "Token not foundd" : error,
+            userFriendlyMessage: "Token not found"));
+  }
+}
+
 class BadRequestError extends GenericServerError {
   BadRequestError(super.error);
 
