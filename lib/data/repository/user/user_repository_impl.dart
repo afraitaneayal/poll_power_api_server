@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/data/datasources/user/i_user_datasource_repository.dart';
 import 'package:poll_power_api_server/domain/entities/user/user.dart';
 import 'package:poll_power_api_server/domain/objects/jwt_object.dart';

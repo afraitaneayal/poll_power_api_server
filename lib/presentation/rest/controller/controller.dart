@@ -7,7 +7,7 @@ import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import 'package:poll_power_api_server/domain/params/vote/create_vote_param.dart';
 import 'package:poll_power_api_server/presentation/usecases.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
-import '../../../common/error/error.dart';
+import '../../../common/error/errors.dart';
 
 APIError internalServerError(ServerError l) =>
     InternalServerErrorWhileProccessing(l.getError()).getAPIError();

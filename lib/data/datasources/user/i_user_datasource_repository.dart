@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/data/models/transform.dart';
 import 'package:poll_power_api_server/domain/entities/user/user.dart';
 import 'package:poll_power_api_server/domain/objects/jwt_object.dart';

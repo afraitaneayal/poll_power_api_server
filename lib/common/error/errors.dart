@@ -1,28 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:poll_power_openapi/poll_power_openapi.dart';
-
-class ErrorCatcher {
-  static Future<Either<ServerError, T>> tryCatch<T>(Future<T> fn) async {
-    try {
-      final result = await fn;
-      return right(result);
-    } catch (e) {
-      final error = e.toString();
-      print(error);
-      return left(GenericServerError(error));
-    }
-  }
-}
+import 'api_error_helper.dart';
 
 abstract class ServerError {
   String getError();
-}
-
-// Get API error
-APIError getAPIError(String devMessage, String userFriendlyMessage) {
-  return APIError(
-      error: APIErrorContent(
-          devMessage: devMessage, userFriendlyMessage: userFriendlyMessage));
 }
 
 class GenericServerError extends ServerError {
@@ -35,10 +15,11 @@ class GenericServerError extends ServerError {
   }
 }
 
-class TokenNotFoundError extends GenericServerError {
+class TokenNotFoundError extends GenericServerError with APIErrorHelper {
   TokenNotFoundError(super.error);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -47,10 +28,11 @@ class TokenNotFoundError extends GenericServerError {
   }
 }
 
-class BadRequestError extends GenericServerError {
+class BadRequestError extends GenericServerError with APIErrorHelper {
   BadRequestError(super.error);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -59,11 +41,12 @@ class BadRequestError extends GenericServerError {
   }
 }
 
-class UserAlreadyExistError extends GenericServerError {
+class UserAlreadyExistError extends GenericServerError with APIErrorHelper {
   final String stackTrace;
   UserAlreadyExistError(this.stackTrace) : super(stackTrace);
 
 // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -72,11 +55,12 @@ class UserAlreadyExistError extends GenericServerError {
   }
 }
 
-class InvalidTokenError extends GenericServerError {
+class InvalidTokenError extends GenericServerError with APIErrorHelper {
   final String stackTrace;
   InvalidTokenError(this.stackTrace) : super(stackTrace);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -84,11 +68,12 @@ class InvalidTokenError extends GenericServerError {
   }
 }
 
-class InvalidCredentialsError extends GenericServerError {
+class InvalidCredentialsError extends GenericServerError with APIErrorHelper {
   final String stackTrace;
   InvalidCredentialsError(this.stackTrace) : super(stackTrace);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -97,11 +82,13 @@ class InvalidCredentialsError extends GenericServerError {
   }
 }
 
-class InternalServerErrorWhileProccessing extends GenericServerError {
+class InternalServerErrorWhileProccessing extends GenericServerError
+    with APIErrorHelper {
   final String stackTrace;
   InternalServerErrorWhileProccessing(this.stackTrace) : super(stackTrace);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -110,10 +97,11 @@ class InternalServerErrorWhileProccessing extends GenericServerError {
   }
 }
 
-class UnauthorizedUserError extends GenericServerError {
+class UnauthorizedUserError extends GenericServerError with APIErrorHelper {
   UnauthorizedUserError(super.error);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -122,11 +110,12 @@ class UnauthorizedUserError extends GenericServerError {
   }
 }
 
-class ErrorWhileSigningUser extends GenericServerError {
+class ErrorWhileSigningUser extends GenericServerError with APIErrorHelper {
   final String stackTrace;
   ErrorWhileSigningUser(this.stackTrace) : super(stackTrace);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(
@@ -136,11 +125,12 @@ class ErrorWhileSigningUser extends GenericServerError {
   }
 }
 
-class UserNotFoundError extends GenericServerError {
+class UserNotFoundError extends GenericServerError with APIErrorHelper {
   final String stackTrace;
   UserNotFoundError(this.stackTrace) : super(stackTrace);
 
   // Get API error
+  @override
   APIError getAPIError() {
     return APIError(
         error: APIErrorContent(

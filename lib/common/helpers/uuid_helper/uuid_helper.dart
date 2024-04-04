@@ -1,7 +1,12 @@
 import 'package:uuid/uuid.dart';
 
-class UuidHelper {
-  static String generateUuidV1() {
+abstract class IUuidHelper {
+  String generateUuid();
+}
+
+class UuidHelperImpl implements IUuidHelper {
+  @override
+  String generateUuid() {
     return Uuid().v1();
   }
 }

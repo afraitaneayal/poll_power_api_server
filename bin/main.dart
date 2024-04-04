@@ -7,7 +7,7 @@ Future<void> init() async {
   configureDependencies();
 }
 
-void main(List<String> args) async {
+Future<void> main(List<String> args) async {
   await init();
   // await startGRPCServer();
   await startRestServer();

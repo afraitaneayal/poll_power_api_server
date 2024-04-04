@@ -1,6 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
+import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/candidate/i_candidate_datasource_repository.dart';
+import 'package:poll_power_api_server/di.dart';
 import 'package:poll_power_api_server/domain/entities/candidate/candidate.dart';
 import 'package:poll_power_api_server/domain/params/candidate/create_candidate_param.dart';
 import 'package:poll_power_api_server/domain/params/candidate/get_candidate_param.dart';
@@ -18,9 +20,7 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   Future<CandidateEntity> createCandidate(CreateCandidateParam param) async {
     final Candidate candidate = await _client.candidate.create(
         data: PrismaUnion.$1(CandidateCreateInput(
-
-            /// TODO generate uuid
-            uuid: "",
+            uuid: locator.get<IUuidHelper>().generateUuid(),
             slogan: param.slogan,
             speech: param.speech ?? "",
             user: UserCreateNestedOneWithoutCandidateInput(

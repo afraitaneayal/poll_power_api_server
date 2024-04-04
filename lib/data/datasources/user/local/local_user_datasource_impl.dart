@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
-import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
 import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/user/i_user_datasource_repository.dart';
@@ -28,7 +28,7 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   Future<UserEntity> createUser(CreateUserParam param) async {
     final userResult = await _client.user.create(
         data: PrismaUnion.$1(UserCreateInput(
-            uuid: UuidHelper.generateUuidV1(),
+            uuid: locator.get<IUuidHelper>().generateUuid(),
             firstName: param.firstName,
             lastName: param.lastName,
             email: param.email,
@@ -54,8 +54,9 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
         .findFirst(where: UserWhereInput(email: PrismaUnion.$2(param.email)));
 
     if (user != null) {
-      final isValid =
-          PasswordHelper.verifyPassword(user.password, param.password);
+      final isValid = locator
+          .get<IPasswordHelper>()
+          .verifyPassword(user.password!, param.password);
       return isValid
           ? right(JwtObject(
               refresh:

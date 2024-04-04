@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:poll_power_api_server/common/error/error.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/domain/params/user/create_user_param.dart';
 import 'package:poll_power_api_server/domain/reposirory/user/i_user_repository.dart';
 import 'package:poll_power_api_server/domain/usecases/usecase.dart';
+import '../../../common/error/error_catcher.dart';
 import '../../entities/user/user.dart';
 
 @singleton
