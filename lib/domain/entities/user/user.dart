@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -9,11 +11,11 @@ class UserEntity with _$UserEntity {
     required String uuid,
     required String email,
     required String password,
-    required String firstName,
-    required String lastName,
+    required String first_name,
+    required String last_name,
     required String grade,
-    required String areaOfStudy,
-    required String image,
+    required String area_of_study,
+    required String? image,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

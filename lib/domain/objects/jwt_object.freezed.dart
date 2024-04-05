@@ -20,7 +20,7 @@ JwtObject _$JwtObjectFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JwtObject {
-  String get refresh => throw _privateConstructorUsedError;
+  String get refresh_token => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   String get key => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $JwtObjectCopyWith<$Res> {
   factory $JwtObjectCopyWith(JwtObject value, $Res Function(JwtObject) then) =
       _$JwtObjectCopyWithImpl<$Res, JwtObject>;
   @useResult
-  $Res call({String refresh, String token, String key});
+  $Res call({String refresh_token, String token, String key});
 }
 
 /// @nodoc
@@ -51,14 +51,14 @@ class _$JwtObjectCopyWithImpl<$Res, $Val extends JwtObject>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? refresh = null,
+    Object? refresh_token = null,
     Object? token = null,
     Object? key = null,
   }) {
     return _then(_value.copyWith(
-      refresh: null == refresh
-          ? _value.refresh
-          : refresh // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _value.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
       token: null == token
           ? _value.token
@@ -80,7 +80,7 @@ abstract class _$$JwtObjectImplCopyWith<$Res>
       __$$JwtObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String refresh, String token, String key});
+  $Res call({String refresh_token, String token, String key});
 }
 
 /// @nodoc
@@ -94,14 +94,14 @@ class __$$JwtObjectImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? refresh = null,
+    Object? refresh_token = null,
     Object? token = null,
     Object? key = null,
   }) {
     return _then(_$JwtObjectImpl(
-      refresh: null == refresh
-          ? _value.refresh
-          : refresh // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _value.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
       token: null == token
           ? _value.token
@@ -119,13 +119,13 @@ class __$$JwtObjectImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$JwtObjectImpl implements _JwtObject {
   const _$JwtObjectImpl(
-      {required this.refresh, required this.token, required this.key});
+      {required this.refresh_token, required this.token, required this.key});
 
   factory _$JwtObjectImpl.fromJson(Map<String, dynamic> json) =>
       _$$JwtObjectImplFromJson(json);
 
   @override
-  final String refresh;
+  final String refresh_token;
   @override
   final String token;
   @override
@@ -133,7 +133,7 @@ class _$JwtObjectImpl implements _JwtObject {
 
   @override
   String toString() {
-    return 'JwtObject(refresh: $refresh, token: $token, key: $key)';
+    return 'JwtObject(refresh_token: $refresh_token, token: $token, key: $key)';
   }
 
   @override
@@ -141,14 +141,15 @@ class _$JwtObjectImpl implements _JwtObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$JwtObjectImpl &&
-            (identical(other.refresh, refresh) || other.refresh == refresh) &&
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.key, key) || other.key == key));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, refresh, token, key);
+  int get hashCode => Object.hash(runtimeType, refresh_token, token, key);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +167,7 @@ class _$JwtObjectImpl implements _JwtObject {
 
 abstract class _JwtObject implements JwtObject {
   const factory _JwtObject(
-      {required final String refresh,
+      {required final String refresh_token,
       required final String token,
       required final String key}) = _$JwtObjectImpl;
 
@@ -174,7 +175,7 @@ abstract class _JwtObject implements JwtObject {
       _$JwtObjectImpl.fromJson;
 
   @override
-  String get refresh;
+  String get refresh_token;
   @override
   String get token;
   @override

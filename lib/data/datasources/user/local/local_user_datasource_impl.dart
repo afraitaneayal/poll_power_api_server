@@ -59,9 +59,9 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
           .verifyPassword(user.password!, param.password);
       return isValid
           ? right(JwtObject(
-              refresh:
+              refresh_token:
                   await locator.get<TokenHelper>().generateToken(user.uuid!),
-              key: _key,
+              key: locator.get<IPasswordHelper>().hashPassword(_key),
               token:
                   await locator.get<TokenHelper>().generateToken(user.uuid!)))
           : left(InvalidCredentialsError(""));
@@ -76,10 +76,10 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
         uuid: param.uuid,
         email: param.email,
         password: param.password,
-        firstName: param.firstName,
-        lastName: param.lastName,
+        first_name: param.firstName,
+        last_name: param.lastName,
         grade: param.grade,
-        areaOfStudy: param.areaOfStudy,
+        area_of_study: param.areaOfStudy,
         image: param.image);
   }
 }

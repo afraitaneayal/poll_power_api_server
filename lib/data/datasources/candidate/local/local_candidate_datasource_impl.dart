@@ -26,13 +26,13 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
             user: UserCreateNestedOneWithoutCandidateInput(
                 create: PrismaUnion.$1(UserCreateWithoutCandidateInput(
                     uuid: param.user.uuid,
-                    firstName: param.user.firstName,
-                    lastName: param.user.lastName,
+                    firstName: param.user.first_name,
+                    lastName: param.user.last_name,
                     email: param.user.email,
                     password: param.user.password,
-                    image: param.user.image,
+                    image: param.user.image ?? "",
                     grade: param.user.grade,
-                    areaOfStudy: param.user.areaOfStudy))))));
+                    areaOfStudy: param.user.area_of_study))))));
 
     return transform(candidate);
   }

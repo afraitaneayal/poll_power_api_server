@@ -20,4 +20,8 @@ abstract class AuthSecrets {
   @singleton
   @Named('encryptKey')
   String get encryptKey => dotEnvLoader['ENCRYPT_KEY']!;
+
+  @singleton
+  @Named("appKey")
+  String get appKey => dotEnvLoader['appKey']!;
 }

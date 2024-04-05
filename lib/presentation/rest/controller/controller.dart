@@ -86,7 +86,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       if (!isTokenValid) {
         return VoteCandidateResponse.response401(invalidToken);
       } else {
-        final uuid = await locator.get<TokenHelper>().extractUid(bearer);
+        final uuid = await locator.get<TokenHelper>().extractUuid(bearer);
         if (uuid == null || !isTokenValid) {
           return VoteCandidateResponse.response401(invalidToken);
         } else {
@@ -149,7 +149,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
         return SignUpUserResponse.response201(User.fromJson(r.toJson()));
       });
     } catch (e, stackTrace) {
-      print(e.toString());
+      print(stackTrace.toString());
       return SignUpUserResponse.response400(
           BadRequestError(stackTrace.toString()).getAPIError());
     }

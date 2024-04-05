@@ -23,11 +23,11 @@ mixin _$UserEntity {
   String get uuid => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
+  String get first_name => throw _privateConstructorUsedError;
+  String get last_name => throw _privateConstructorUsedError;
   String get grade => throw _privateConstructorUsedError;
-  String get areaOfStudy => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String get area_of_study => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,11 +45,11 @@ abstract class $UserEntityCopyWith<$Res> {
       {String uuid,
       String email,
       String password,
-      String firstName,
-      String lastName,
+      String first_name,
+      String last_name,
       String grade,
-      String areaOfStudy,
-      String image});
+      String area_of_study,
+      String? image});
 }
 
 /// @nodoc
@@ -68,11 +68,11 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? uuid = null,
     Object? email = null,
     Object? password = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? first_name = null,
+    Object? last_name = null,
     Object? grade = null,
-    Object? areaOfStudy = null,
-    Object? image = null,
+    Object? area_of_study = null,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       uuid: null == uuid
@@ -87,26 +87,26 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      first_name: null == first_name
+          ? _value.first_name
+          : first_name // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      last_name: null == last_name
+          ? _value.last_name
+          : last_name // ignore: cast_nullable_to_non_nullable
               as String,
       grade: null == grade
           ? _value.grade
           : grade // ignore: cast_nullable_to_non_nullable
               as String,
-      areaOfStudy: null == areaOfStudy
-          ? _value.areaOfStudy
-          : areaOfStudy // ignore: cast_nullable_to_non_nullable
+      area_of_study: null == area_of_study
+          ? _value.area_of_study
+          : area_of_study // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -123,11 +123,11 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       {String uuid,
       String email,
       String password,
-      String firstName,
-      String lastName,
+      String first_name,
+      String last_name,
       String grade,
-      String areaOfStudy,
-      String image});
+      String area_of_study,
+      String? image});
 }
 
 /// @nodoc
@@ -144,11 +144,11 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? uuid = null,
     Object? email = null,
     Object? password = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? first_name = null,
+    Object? last_name = null,
     Object? grade = null,
-    Object? areaOfStudy = null,
-    Object? image = null,
+    Object? area_of_study = null,
+    Object? image = freezed,
   }) {
     return _then(_$UserEntityImpl(
       uuid: null == uuid
@@ -163,26 +163,26 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      first_name: null == first_name
+          ? _value.first_name
+          : first_name // ignore: cast_nullable_to_non_nullable
               as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
+      last_name: null == last_name
+          ? _value.last_name
+          : last_name // ignore: cast_nullable_to_non_nullable
               as String,
       grade: null == grade
           ? _value.grade
           : grade // ignore: cast_nullable_to_non_nullable
               as String,
-      areaOfStudy: null == areaOfStudy
-          ? _value.areaOfStudy
-          : areaOfStudy // ignore: cast_nullable_to_non_nullable
+      area_of_study: null == area_of_study
+          ? _value.area_of_study
+          : area_of_study // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -194,10 +194,10 @@ class _$UserEntityImpl implements _UserEntity {
       {required this.uuid,
       required this.email,
       required this.password,
-      required this.firstName,
-      required this.lastName,
+      required this.first_name,
+      required this.last_name,
       required this.grade,
-      required this.areaOfStudy,
+      required this.area_of_study,
       required this.image});
 
   factory _$UserEntityImpl.fromJson(Map<String, dynamic> json) =>
@@ -210,19 +210,19 @@ class _$UserEntityImpl implements _UserEntity {
   @override
   final String password;
   @override
-  final String firstName;
+  final String first_name;
   @override
-  final String lastName;
+  final String last_name;
   @override
   final String grade;
   @override
-  final String areaOfStudy;
+  final String area_of_study;
   @override
-  final String image;
+  final String? image;
 
   @override
   String toString() {
-    return 'UserEntity(uuid: $uuid, email: $email, password: $password, firstName: $firstName, lastName: $lastName, grade: $grade, areaOfStudy: $areaOfStudy, image: $image)';
+    return 'UserEntity(uuid: $uuid, email: $email, password: $password, first_name: $first_name, last_name: $last_name, grade: $grade, area_of_study: $area_of_study, image: $image)';
   }
 
   @override
@@ -234,20 +234,20 @@ class _$UserEntityImpl implements _UserEntity {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.first_name, first_name) ||
+                other.first_name == first_name) &&
+            (identical(other.last_name, last_name) ||
+                other.last_name == last_name) &&
             (identical(other.grade, grade) || other.grade == grade) &&
-            (identical(other.areaOfStudy, areaOfStudy) ||
-                other.areaOfStudy == areaOfStudy) &&
+            (identical(other.area_of_study, area_of_study) ||
+                other.area_of_study == area_of_study) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uuid, email, password, firstName,
-      lastName, grade, areaOfStudy, image);
+  int get hashCode => Object.hash(runtimeType, uuid, email, password,
+      first_name, last_name, grade, area_of_study, image);
 
   @JsonKey(ignore: true)
   @override
@@ -268,11 +268,11 @@ abstract class _UserEntity implements UserEntity {
       {required final String uuid,
       required final String email,
       required final String password,
-      required final String firstName,
-      required final String lastName,
+      required final String first_name,
+      required final String last_name,
       required final String grade,
-      required final String areaOfStudy,
-      required final String image}) = _$UserEntityImpl;
+      required final String area_of_study,
+      required final String? image}) = _$UserEntityImpl;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$UserEntityImpl.fromJson;
@@ -284,15 +284,15 @@ abstract class _UserEntity implements UserEntity {
   @override
   String get password;
   @override
-  String get firstName;
+  String get first_name;
   @override
-  String get lastName;
+  String get last_name;
   @override
   String get grade;
   @override
-  String get areaOfStudy;
+  String get area_of_study;
   @override
-  String get image;
+  String? get image;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>
