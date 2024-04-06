@@ -22,7 +22,7 @@ CandidateEntity _$CandidateEntityFromJson(Map<String, dynamic> json) {
 mixin _$CandidateEntity {
   String get slogan => throw _privateConstructorUsedError;
   String get speech => throw _privateConstructorUsedError;
-  String get voteCount => throw _privateConstructorUsedError;
+  int get voteCount => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   UserEntity get user => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $CandidateEntityCopyWith<$Res> {
   $Res call(
       {String slogan,
       String speech,
-      String voteCount,
+      int voteCount,
       String uuid,
       UserEntity user});
 
@@ -79,7 +79,7 @@ class _$CandidateEntityCopyWithImpl<$Res, $Val extends CandidateEntity>
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$CandidateEntityImplCopyWith<$Res>
   $Res call(
       {String slogan,
       String speech,
-      String voteCount,
+      int voteCount,
       String uuid,
       UserEntity user});
 
@@ -148,7 +148,7 @@ class __$$CandidateEntityImplCopyWithImpl<$Res>
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ class _$CandidateEntityImpl implements _CandidateEntity {
   @override
   final String speech;
   @override
-  final String voteCount;
+  final int voteCount;
   @override
   final String uuid;
   @override
@@ -227,7 +227,7 @@ abstract class _CandidateEntity implements CandidateEntity {
   const factory _CandidateEntity(
       {required final String slogan,
       required final String speech,
-      required final String voteCount,
+      required final int voteCount,
       required final String uuid,
       required final UserEntity user}) = _$CandidateEntityImpl;
 
@@ -239,7 +239,7 @@ abstract class _CandidateEntity implements CandidateEntity {
   @override
   String get speech;
   @override
-  String get voteCount;
+  int get voteCount;
   @override
   String get uuid;
   @override

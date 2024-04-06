@@ -12,6 +12,7 @@ import 'package:poll_power_api_server/domain/params/user/create_user_param.dart'
 import 'package:poll_power_api_server/domain/params/user/get_user_param.dart';
 import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import 'package:poll_power_api_server/gen/prisma/client.dart';
+import 'package:poll_power_api_server/gen/prisma/model.dart';
 import 'package:poll_power_api_server/gen/prisma/prisma.dart';
 
 import '../../../../common/helpers/password_helper/password_helper.dart';
@@ -71,15 +72,16 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   }
 
   @override
-  UserEntity transform(param) {
+  UserEntity transform(p) {
+    final User param = p as User;
     return UserEntity(
-        uuid: param.uuid,
-        email: param.email,
-        password: param.password,
-        first_name: param.firstName,
-        last_name: param.lastName,
-        grade: param.grade,
-        area_of_study: param.areaOfStudy,
+        uuid: param.uuid!,
+        email: param.email!,
+        password: param.password!,
+        first_name: param.firstName!,
+        last_name: param.lastName!,
+        grade: param.grade!,
+        area_of_study: param.areaOfStudy!,
         image: param.image);
   }
 }

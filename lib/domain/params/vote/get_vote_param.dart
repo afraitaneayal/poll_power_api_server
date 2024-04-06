@@ -1,5 +1,5 @@
 class GetVoteParam {
-  final List<String> candidateUuids;
+  final String candidateUuid;
 
-  GetVoteParam({required this.candidateUuids});
+  GetVoteParam({required this.candidateUuid});
 }

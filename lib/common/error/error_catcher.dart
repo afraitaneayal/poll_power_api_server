@@ -7,10 +7,10 @@ class ErrorCatcher {
     try {
       final result = await fn;
       return right(result);
-    } catch (e) {
+    } catch (e, stackTrace) {
       final error = e.toString();
       print(error);
-      return left(GenericServerError(error));
+      return left(GenericServerError(stackTrace.toString()));
     }
   }
 }

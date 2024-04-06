@@ -10,7 +10,7 @@ class CandidateEntity with _$CandidateEntity {
   const factory CandidateEntity({
     required String slogan,
     required String speech,
-    required String voteCount,
+    required int voteCount,
     required String uuid,
     required UserEntity user,
   }) = _CandidateEntity;

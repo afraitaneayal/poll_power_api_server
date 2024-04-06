@@ -212,6 +212,88 @@ class DateTimeFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class NestedIntFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedIntFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? equals;
+
+  final Iterable<int>? $in;
+
+  final Iterable<int>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int, _i2.NestedIntFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+      };
+}
+
+class IntFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const IntFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? equals;
+
+  final Iterable<int>? $in;
+
+  final Iterable<int>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int, _i2.NestedIntFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+      };
+}
+
 class CandidateRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const CandidateRelationFilter({
@@ -239,6 +321,7 @@ class VoteWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -257,6 +340,8 @@ class VoteWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? votedAt;
 
+  final _i1.PrismaUnion<_i2.IntFilter, int>? voteCount;
+
   final _i1.PrismaUnion<_i2.UserRelationFilter, _i2.UserWhereInput>? user;
 
   final _i1.PrismaUnion<_i2.CandidateRelationFilter, _i2.CandidateWhereInput>?
@@ -271,6 +356,7 @@ class VoteWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -546,6 +632,7 @@ class VoteSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -558,6 +645,8 @@ class VoteSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? votedAt;
 
+  final bool? voteCount;
+
   final _i1.PrismaUnion<bool, _i2.VoteUserArgs>? user;
 
   final _i1.PrismaUnion<bool, _i2.VoteCandidateArgs>? candidate;
@@ -568,6 +657,7 @@ class VoteSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -786,6 +876,7 @@ class VoteOrderByWithRelationInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -798,6 +889,8 @@ class VoteOrderByWithRelationInput
 
   final _i2.SortOrder? votedAt;
 
+  final _i2.SortOrder? voteCount;
+
   final _i2.UserOrderByWithRelationInput? user;
 
   final _i2.CandidateOrderByWithRelationInput? candidate;
@@ -808,6 +901,7 @@ class VoteOrderByWithRelationInput
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -971,6 +1065,7 @@ class VoteUncheckedCreateWithoutCandidateInput
     required this.uuid,
     required this.userUuid,
     this.votedAt,
+    required this.voteCount,
   });
 
   final String uuid;
@@ -979,11 +1074,14 @@ class VoteUncheckedCreateWithoutCandidateInput
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -997,6 +1095,7 @@ class VoteWhereUniqueInput
     this.OR,
     this.NOT,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -1015,6 +1114,8 @@ class VoteWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? votedAt;
 
+  final _i1.PrismaUnion<_i2.IntFilter, int>? voteCount;
+
   final _i1.PrismaUnion<_i2.UserRelationFilter, _i2.UserWhereInput>? user;
 
   final _i1.PrismaUnion<_i2.CandidateRelationFilter, _i2.CandidateWhereInput>?
@@ -1029,6 +1130,7 @@ class VoteWhereUniqueInput
         'OR': OR,
         'NOT': NOT,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -1288,6 +1390,7 @@ class VoteCreateWithoutCandidateInput
   const VoteCreateWithoutCandidateInput({
     required this.uuid,
     this.votedAt,
+    required this.voteCount,
     required this.user,
   });
 
@@ -1295,12 +1398,15 @@ class VoteCreateWithoutCandidateInput
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   final _i2.UserCreateNestedOneWithoutVoteInput user;
 
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
       };
 }
@@ -1429,6 +1535,7 @@ class VoteUncheckedCreateWithoutUserInput
     required this.uuid,
     required this.candidateUuid,
     this.votedAt,
+    required this.voteCount,
   });
 
   final String uuid;
@@ -1437,11 +1544,14 @@ class VoteUncheckedCreateWithoutUserInput
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -1674,6 +1784,7 @@ class VoteCreateWithoutUserInput
   const VoteCreateWithoutUserInput({
     required this.uuid,
     this.votedAt,
+    required this.voteCount,
     required this.candidate,
   });
 
@@ -1681,12 +1792,15 @@ class VoteCreateWithoutUserInput
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   final _i2.CandidateCreateNestedOneWithoutVoteInput candidate;
 
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'candidate': candidate,
       };
 }
@@ -1883,6 +1997,36 @@ class DateTimeFieldUpdateOperationsInput
   Map<String, dynamic> toJson() => {'set': set};
 }
 
+class IntFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const IntFieldUpdateOperationsInput({
+    this.set,
+    this.increment,
+    this.decrement,
+    this.multiply,
+    this.divide,
+  });
+
+  final int? set;
+
+  final int? increment;
+
+  final int? decrement;
+
+  final int? multiply;
+
+  final int? divide;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'set': set,
+        'increment': increment,
+        'decrement': decrement,
+        'multiply': multiply,
+        'divide': divide,
+      };
+}
+
 class UserUpdateWithoutVoteInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserUpdateWithoutVoteInput({
@@ -1937,6 +2081,7 @@ class VoteUncheckedUpdateWithoutCandidateInput
     this.uuid,
     this.userUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? uuid;
@@ -1946,11 +2091,14 @@ class VoteUncheckedUpdateWithoutCandidateInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -2232,6 +2380,7 @@ class VoteUpdateWithoutCandidateInput
   const VoteUpdateWithoutCandidateInput({
     this.uuid,
     this.votedAt,
+    this.voteCount,
     this.user,
   });
 
@@ -2240,12 +2389,15 @@ class VoteUpdateWithoutCandidateInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   final _i2.UserUpdateOneRequiredWithoutVoteNestedInput? user;
 
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
       };
 }
@@ -2462,6 +2614,7 @@ class VoteUncheckedUpdateWithoutUserInput
     this.uuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? uuid;
@@ -2472,11 +2625,14 @@ class VoteUncheckedUpdateWithoutUserInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -2800,6 +2956,7 @@ class VoteUpdateWithoutUserInput
   const VoteUpdateWithoutUserInput({
     this.uuid,
     this.votedAt,
+    this.voteCount,
     this.candidate,
   });
 
@@ -2808,12 +2965,15 @@ class VoteUpdateWithoutUserInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   final _i2.CandidateUpdateOneRequiredWithoutVoteNestedInput? candidate;
 
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'candidate': candidate,
       };
 }
@@ -3437,47 +3597,6 @@ class UserOrderByWithAggregationInput
         '_count': $count,
         '_max': $max,
         '_min': $min,
-      };
-}
-
-class NestedIntFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedIntFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? equals;
-
-  final Iterable<int>? $in;
-
-  final Iterable<int>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<int, _i2.NestedIntFilter>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
       };
 }
 
@@ -4682,7 +4801,8 @@ enum VoteScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   uuid<String>('uuid', 'Vote'),
   userUuid<String>('user_uuid', 'Vote'),
   candidateUuid<String>('candidate_uuid', 'Vote'),
-  votedAt<DateTime>('voted_at', 'Vote');
+  votedAt<DateTime>('voted_at', 'Vote'),
+  voteCount<int>('voteCount', 'Vote');
 
   const VoteScalar(
     this.name,
@@ -4700,6 +4820,7 @@ class VoteCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const VoteCreateInput({
     required this.uuid,
     this.votedAt,
+    required this.voteCount,
     required this.user,
     required this.candidate,
   });
@@ -4707,6 +4828,8 @@ class VoteCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final String uuid;
 
   final DateTime? votedAt;
+
+  final int voteCount;
 
   final _i2.UserCreateNestedOneWithoutVoteInput user;
 
@@ -4716,6 +4839,7 @@ class VoteCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -4728,6 +4852,7 @@ class VoteUncheckedCreateInput
     required this.userUuid,
     required this.candidateUuid,
     this.votedAt,
+    required this.voteCount,
   });
 
   final String uuid;
@@ -4738,12 +4863,15 @@ class VoteUncheckedCreateInput
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -4753,6 +4881,7 @@ class VoteCreateManyInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     required this.userUuid,
     required this.candidateUuid,
     this.votedAt,
+    required this.voteCount,
   });
 
   final String uuid;
@@ -4763,12 +4892,15 @@ class VoteCreateManyInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final DateTime? votedAt;
 
+  final int voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -4776,6 +4908,7 @@ class VoteUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const VoteUpdateInput({
     this.uuid,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -4785,6 +4918,8 @@ class VoteUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   final _i2.UserUpdateOneRequiredWithoutVoteNestedInput? user;
 
   final _i2.CandidateUpdateOneRequiredWithoutVoteNestedInput? candidate;
@@ -4793,6 +4928,7 @@ class VoteUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         'user': user,
         'candidate': candidate,
       };
@@ -4805,6 +4941,7 @@ class VoteUncheckedUpdateInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? uuid;
@@ -4817,12 +4954,15 @@ class VoteUncheckedUpdateInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -4831,6 +4971,7 @@ class VoteUpdateManyMutationInput
   const VoteUpdateManyMutationInput({
     this.uuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? uuid;
@@ -4838,10 +4979,13 @@ class VoteUpdateManyMutationInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -4852,6 +4996,7 @@ class VoteUncheckedUpdateManyInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? uuid;
@@ -4864,12 +5009,15 @@ class VoteUncheckedUpdateManyInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       votedAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -4879,6 +5027,7 @@ class VoteCountAggregateOutputType {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.$all,
   });
 
@@ -4888,6 +5037,7 @@ class VoteCountAggregateOutputType {
         userUuid: json['user_uuid'],
         candidateUuid: json['candidate_uuid'],
         votedAt: json['voted_at'],
+        voteCount: json['voteCount'],
         $all: json['_all'],
       );
 
@@ -4899,7 +5049,27 @@ class VoteCountAggregateOutputType {
 
   final int? votedAt;
 
+  final int? voteCount;
+
   final int? $all;
+}
+
+class VoteAvgAggregateOutputType {
+  const VoteAvgAggregateOutputType({this.voteCount});
+
+  factory VoteAvgAggregateOutputType.fromJson(Map json) =>
+      VoteAvgAggregateOutputType(voteCount: json['voteCount']);
+
+  final double? voteCount;
+}
+
+class VoteSumAggregateOutputType {
+  const VoteSumAggregateOutputType({this.voteCount});
+
+  factory VoteSumAggregateOutputType.fromJson(Map json) =>
+      VoteSumAggregateOutputType(voteCount: json['voteCount']);
+
+  final int? voteCount;
 }
 
 class VoteMinAggregateOutputType {
@@ -4908,6 +5078,7 @@ class VoteMinAggregateOutputType {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   factory VoteMinAggregateOutputType.fromJson(Map json) =>
@@ -4916,6 +5087,7 @@ class VoteMinAggregateOutputType {
         userUuid: json['user_uuid'],
         candidateUuid: json['candidate_uuid'],
         votedAt: json['voted_at'],
+        voteCount: json['voteCount'],
       );
 
   final String? uuid;
@@ -4925,6 +5097,8 @@ class VoteMinAggregateOutputType {
   final String? candidateUuid;
 
   final DateTime? votedAt;
+
+  final int? voteCount;
 }
 
 class VoteMaxAggregateOutputType {
@@ -4933,6 +5107,7 @@ class VoteMaxAggregateOutputType {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   factory VoteMaxAggregateOutputType.fromJson(Map json) =>
@@ -4941,6 +5116,7 @@ class VoteMaxAggregateOutputType {
         userUuid: json['user_uuid'],
         candidateUuid: json['candidate_uuid'],
         votedAt: json['voted_at'],
+        voteCount: json['voteCount'],
       );
 
   final String? uuid;
@@ -4950,6 +5126,8 @@ class VoteMaxAggregateOutputType {
   final String? candidateUuid;
 
   final DateTime? votedAt;
+
+  final int? voteCount;
 }
 
 class VoteGroupByOutputType {
@@ -4958,7 +5136,10 @@ class VoteGroupByOutputType {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.$count,
+    this.$avg,
+    this.$sum,
     this.$min,
     this.$max,
   });
@@ -4968,8 +5149,15 @@ class VoteGroupByOutputType {
         userUuid: json['user_uuid'],
         candidateUuid: json['candidate_uuid'],
         votedAt: json['voted_at'],
+        voteCount: json['voteCount'],
         $count: json['_count'] is Map
             ? _i2.VoteCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.VoteAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.VoteSumAggregateOutputType.fromJson(json['_sum'])
             : null,
         $min: json['_min'] is Map
             ? _i2.VoteMinAggregateOutputType.fromJson(json['_min'])
@@ -4987,7 +5175,13 @@ class VoteGroupByOutputType {
 
   final DateTime? votedAt;
 
+  final int? voteCount;
+
   final _i2.VoteCountAggregateOutputType? $count;
+
+  final _i2.VoteAvgAggregateOutputType? $avg;
+
+  final _i2.VoteSumAggregateOutputType? $sum;
 
   final _i2.VoteMinAggregateOutputType? $min;
 
@@ -5001,6 +5195,7 @@ class VoteCountOrderByAggregateInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i2.SortOrder? uuid;
@@ -5011,13 +5206,26 @@ class VoteCountOrderByAggregateInput
 
   final _i2.SortOrder? votedAt;
 
+  final _i2.SortOrder? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
+}
+
+class VoteAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteAvgOrderByAggregateInput({this.voteCount});
+
+  final _i2.SortOrder? voteCount;
+
+  @override
+  Map<String, dynamic> toJson() => {'voteCount': voteCount};
 }
 
 class VoteMaxOrderByAggregateInput
@@ -5027,6 +5235,7 @@ class VoteMaxOrderByAggregateInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i2.SortOrder? uuid;
@@ -5037,12 +5246,15 @@ class VoteMaxOrderByAggregateInput
 
   final _i2.SortOrder? votedAt;
 
+  final _i2.SortOrder? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -5053,6 +5265,7 @@ class VoteMinOrderByAggregateInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i2.SortOrder? uuid;
@@ -5063,13 +5276,26 @@ class VoteMinOrderByAggregateInput
 
   final _i2.SortOrder? votedAt;
 
+  final _i2.SortOrder? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
+}
+
+class VoteSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteSumOrderByAggregateInput({this.voteCount});
+
+  final _i2.SortOrder? voteCount;
+
+  @override
+  Map<String, dynamic> toJson() => {'voteCount': voteCount};
 }
 
 class VoteOrderByWithAggregationInput
@@ -5079,9 +5305,12 @@ class VoteOrderByWithAggregationInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.$count,
+    this.$avg,
     this.$max,
     this.$min,
+    this.$sum,
   });
 
   final _i2.SortOrder? uuid;
@@ -5092,11 +5321,17 @@ class VoteOrderByWithAggregationInput
 
   final _i2.SortOrder? votedAt;
 
+  final _i2.SortOrder? voteCount;
+
   final _i2.VoteCountOrderByAggregateInput? $count;
+
+  final _i2.VoteAvgOrderByAggregateInput? $avg;
 
   final _i2.VoteMaxOrderByAggregateInput? $max;
 
   final _i2.VoteMinOrderByAggregateInput? $min;
+
+  final _i2.VoteSumOrderByAggregateInput? $sum;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -5104,9 +5339,12 @@ class VoteOrderByWithAggregationInput
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         '_count': $count,
+        '_avg': $avg,
         '_max': $max,
         '_min': $min,
+        '_sum': $sum,
       };
 }
 
@@ -5218,6 +5456,171 @@ class DateTimeWithAggregatesFilter
       };
 }
 
+class NestedFloatFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedFloatFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? equals;
+
+  final Iterable<double>? $in;
+
+  final Iterable<double>? notIn;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? lt;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? lte;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? gt;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? gte;
+
+  final _i1.PrismaUnion<double, _i2.NestedFloatFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+      };
+}
+
+class NestedIntWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedIntWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? equals;
+
+  final Iterable<int>? $in;
+
+  final Iterable<int>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int, _i2.NestedIntWithAggregatesFilter>? not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedFloatFilter? $avg;
+
+  final _i2.NestedIntFilter? $sum;
+
+  final _i2.NestedIntFilter? $min;
+
+  final _i2.NestedIntFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class IntWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const IntWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? equals;
+
+  final Iterable<int>? $in;
+
+  final Iterable<int>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int, _i2.NestedIntWithAggregatesFilter>? not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedFloatFilter? $avg;
+
+  final _i2.NestedIntFilter? $sum;
+
+  final _i2.NestedIntFilter? $min;
+
+  final _i2.NestedIntFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
 class VoteScalarWhereWithAggregatesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const VoteScalarWhereWithAggregatesInput({
@@ -5228,6 +5631,7 @@ class VoteScalarWhereWithAggregatesInput
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final _i1.PrismaUnion<_i2.VoteScalarWhereWithAggregatesInput,
@@ -5246,6 +5650,8 @@ class VoteScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.DateTimeWithAggregatesFilter, DateTime>? votedAt;
 
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -5255,6 +5661,7 @@ class VoteScalarWhereWithAggregatesInput
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -5265,6 +5672,7 @@ class VoteCountAggregateOutputTypeSelect
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.$all,
   });
 
@@ -5276,6 +5684,8 @@ class VoteCountAggregateOutputTypeSelect
 
   final bool? votedAt;
 
+  final bool? voteCount;
+
   final bool? $all;
 
   @override
@@ -5284,6 +5694,7 @@ class VoteCountAggregateOutputTypeSelect
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         '_all': $all,
       };
 }
@@ -5298,6 +5709,46 @@ class VoteGroupByOutputTypeCountArgs
   Map<String, dynamic> toJson() => {'select': select};
 }
 
+class VoteAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteAvgAggregateOutputTypeSelect({this.voteCount});
+
+  final bool? voteCount;
+
+  @override
+  Map<String, dynamic> toJson() => {'voteCount': voteCount};
+}
+
+class VoteGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.VoteAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class VoteSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteSumAggregateOutputTypeSelect({this.voteCount});
+
+  final bool? voteCount;
+
+  @override
+  Map<String, dynamic> toJson() => {'voteCount': voteCount};
+}
+
+class VoteGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const VoteGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.VoteSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
 class VoteMinAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const VoteMinAggregateOutputTypeSelect({
@@ -5305,6 +5756,7 @@ class VoteMinAggregateOutputTypeSelect
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final bool? uuid;
@@ -5315,12 +5767,15 @@ class VoteMinAggregateOutputTypeSelect
 
   final bool? votedAt;
 
+  final bool? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -5341,6 +5796,7 @@ class VoteMaxAggregateOutputTypeSelect
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
   });
 
   final bool? uuid;
@@ -5351,12 +5807,15 @@ class VoteMaxAggregateOutputTypeSelect
 
   final bool? votedAt;
 
+  final bool? voteCount;
+
   @override
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
       };
 }
 
@@ -5377,7 +5836,10 @@ class VoteGroupByOutputTypeSelect
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.$count,
+    this.$avg,
+    this.$sum,
     this.$min,
     this.$max,
   });
@@ -5390,7 +5852,13 @@ class VoteGroupByOutputTypeSelect
 
   final bool? votedAt;
 
+  final bool? voteCount;
+
   final _i1.PrismaUnion<bool, _i2.VoteGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.VoteGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.VoteGroupByOutputTypeSumArgs>? $sum;
 
   final _i1.PrismaUnion<bool, _i2.VoteGroupByOutputTypeMinArgs>? $min;
 
@@ -5402,7 +5870,10 @@ class VoteGroupByOutputTypeSelect
         'user_uuid': userUuid,
         'candidate_uuid': candidateUuid,
         'voted_at': votedAt,
+        'voteCount': voteCount,
         '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
         '_min': $min,
         '_max': $max,
       };
@@ -5411,6 +5882,8 @@ class VoteGroupByOutputTypeSelect
 class AggregateVote {
   const AggregateVote({
     this.$count,
+    this.$avg,
+    this.$sum,
     this.$min,
     this.$max,
   });
@@ -5418,6 +5891,12 @@ class AggregateVote {
   factory AggregateVote.fromJson(Map json) => AggregateVote(
         $count: json['_count'] is Map
             ? _i2.VoteCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.VoteAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.VoteSumAggregateOutputType.fromJson(json['_sum'])
             : null,
         $min: json['_min'] is Map
             ? _i2.VoteMinAggregateOutputType.fromJson(json['_min'])
@@ -5429,6 +5908,10 @@ class AggregateVote {
 
   final _i2.VoteCountAggregateOutputType? $count;
 
+  final _i2.VoteAvgAggregateOutputType? $avg;
+
+  final _i2.VoteSumAggregateOutputType? $sum;
+
   final _i2.VoteMinAggregateOutputType? $min;
 
   final _i2.VoteMaxAggregateOutputType? $max;
@@ -5439,6 +5922,26 @@ class AggregateVoteCountArgs
   const AggregateVoteCountArgs({this.select});
 
   final _i2.VoteCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateVoteAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateVoteAvgArgs({this.select});
+
+  final _i2.VoteAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateVoteSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateVoteSumArgs({this.select});
+
+  final _i2.VoteSumAggregateOutputTypeSelect? select;
 
   @override
   Map<String, dynamic> toJson() => {'select': select};
@@ -5467,11 +5970,17 @@ class AggregateVoteMaxArgs
 class AggregateVoteSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   const AggregateVoteSelect({
     this.$count,
+    this.$avg,
+    this.$sum,
     this.$min,
     this.$max,
   });
 
   final _i1.PrismaUnion<bool, _i2.AggregateVoteCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateVoteAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateVoteSumArgs>? $sum;
 
   final _i1.PrismaUnion<bool, _i2.AggregateVoteMinArgs>? $min;
 
@@ -5480,6 +5989,8 @@ class AggregateVoteSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   @override
   Map<String, dynamic> toJson() => {
         '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
         '_min': $min,
         '_max': $max,
       };

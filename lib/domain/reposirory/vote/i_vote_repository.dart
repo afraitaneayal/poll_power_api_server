@@ -5,4 +5,5 @@ import '../../entities/vote/vote.dart';
 abstract class IVoteRepository {
   Future<VoteEntity> vote(CreateVoteParam param);
   Future<List<VoteEntity>> getVotes(GetVoteParam param);
+  Future<VoteEntity> getVote(GetVoteParam param);
 }

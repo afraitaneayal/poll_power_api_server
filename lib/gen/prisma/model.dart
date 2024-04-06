@@ -8,6 +8,7 @@ class Vote {
     this.userUuid,
     this.candidateUuid,
     this.votedAt,
+    this.voteCount,
     this.user,
     this.candidate,
   });
@@ -17,6 +18,7 @@ class Vote {
         userUuid: json['user_uuid'],
         candidateUuid: json['candidate_uuid'],
         votedAt: json['voted_at'],
+        voteCount: json['voteCount'],
         user: json['user'] is Map ? _i1.User.fromJson(json['user']) : null,
         candidate: json['candidate'] is Map
             ? _i1.Candidate.fromJson(json['candidate'])
@@ -30,6 +32,8 @@ class Vote {
   final String? candidateUuid;
 
   final DateTime? votedAt;
+
+  final int? voteCount;
 
   final _i1.User? user;
 

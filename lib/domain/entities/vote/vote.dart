@@ -10,6 +10,7 @@ class VoteEntity with _$VoteEntity {
     required DateTime votedAt,
     required String userId,
     required String uuid,
+    required int voteCount,
   }) = _VoteEntity;
 
   factory VoteEntity.fromJson(Map<String, dynamic> json) =>

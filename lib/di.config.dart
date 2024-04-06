@@ -84,8 +84,9 @@ extension GetItInjectableX on _i1.GetIt {
       () => authSecrets.authKey,
       instanceName: 'authKey',
     );
-    gh.lazySingleton<_i7.IVoteDatasourceRepository>(
-        () => _i8.LocalVoteDatasourceImpl());
+    gh.lazySingleton<_i7.IVoteDatasourceRepository>(() =>
+        _i8.LocalVoteDatasourceImpl(
+            gh<_i3.PrismaClient>(instanceName: 'prisma')));
     gh.singleton<_i9.IPasswordHelper>(
         () => _i9.PasswordHelperImpl(gh<String>(instanceName: 'encryptKey')));
     gh.singleton<_i10.TokenHelper>(() => _i10.TokenHelperImpl(

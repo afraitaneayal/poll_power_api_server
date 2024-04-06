@@ -20,4 +20,9 @@ class VoteRepositoryImpl implements IVoteRepository {
   Future<VoteEntity> vote(CreateVoteParam param) async {
     return await _voteDatasourceRepository.vote(param);
   }
+
+  @override
+  Future<VoteEntity> getVote(GetVoteParam param) async {
+    return await _voteDatasourceRepository.getVote(param);
+  }
 }

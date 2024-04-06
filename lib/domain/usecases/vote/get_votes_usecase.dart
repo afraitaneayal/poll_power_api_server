@@ -9,14 +9,13 @@ import 'package:poll_power_api_server/domain/usecases/usecase.dart';
 import '../../../common/error/error_catcher.dart';
 
 @singleton
-class GetVotesUsecase implements Usecase<GetVoteParam, List<VoteEntity>> {
+class GetVotesUsecase implements Usecase<GetVoteParam, VoteEntity> {
   final IVoteRepository _iVoteRepository;
 
   GetVotesUsecase(this._iVoteRepository);
 
   @override
-  Future<Either<ServerError, List<VoteEntity>>> trigger(
-      GetVoteParam param) async {
-    return await ErrorCatcher.tryCatch(_iVoteRepository.getVotes(param));
+  Future<Either<ServerError, VoteEntity?>> trigger(GetVoteParam param) async {
+    return await ErrorCatcher.tryCatch(_iVoteRepository.getVote(param));
   }
 }

@@ -24,6 +24,7 @@ mixin _$VoteEntity {
   DateTime get votedAt => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
+  int get voteCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $VoteEntityCopyWith<$Res> {
           VoteEntity value, $Res Function(VoteEntity) then) =
       _$VoteEntityCopyWithImpl<$Res, VoteEntity>;
   @useResult
-  $Res call({String candidateId, DateTime votedAt, String userId, String uuid});
+  $Res call(
+      {String candidateId,
+      DateTime votedAt,
+      String userId,
+      String uuid,
+      int voteCount});
 }
 
 /// @nodoc
@@ -57,6 +63,7 @@ class _$VoteEntityCopyWithImpl<$Res, $Val extends VoteEntity>
     Object? votedAt = null,
     Object? userId = null,
     Object? uuid = null,
+    Object? voteCount = null,
   }) {
     return _then(_value.copyWith(
       candidateId: null == candidateId
@@ -75,6 +82,10 @@ class _$VoteEntityCopyWithImpl<$Res, $Val extends VoteEntity>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      voteCount: null == voteCount
+          ? _value.voteCount
+          : voteCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -87,7 +98,12 @@ abstract class _$$VoteEntityImplCopyWith<$Res>
       __$$VoteEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String candidateId, DateTime votedAt, String userId, String uuid});
+  $Res call(
+      {String candidateId,
+      DateTime votedAt,
+      String userId,
+      String uuid,
+      int voteCount});
 }
 
 /// @nodoc
@@ -105,6 +121,7 @@ class __$$VoteEntityImplCopyWithImpl<$Res>
     Object? votedAt = null,
     Object? userId = null,
     Object? uuid = null,
+    Object? voteCount = null,
   }) {
     return _then(_$VoteEntityImpl(
       candidateId: null == candidateId
@@ -123,6 +140,10 @@ class __$$VoteEntityImplCopyWithImpl<$Res>
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
+      voteCount: null == voteCount
+          ? _value.voteCount
+          : voteCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -134,7 +155,8 @@ class _$VoteEntityImpl implements _VoteEntity {
       {required this.candidateId,
       required this.votedAt,
       required this.userId,
-      required this.uuid});
+      required this.uuid,
+      required this.voteCount});
 
   factory _$VoteEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$VoteEntityImplFromJson(json);
@@ -147,10 +169,12 @@ class _$VoteEntityImpl implements _VoteEntity {
   final String userId;
   @override
   final String uuid;
+  @override
+  final int voteCount;
 
   @override
   String toString() {
-    return 'VoteEntity(candidateId: $candidateId, votedAt: $votedAt, userId: $userId, uuid: $uuid)';
+    return 'VoteEntity(candidateId: $candidateId, votedAt: $votedAt, userId: $userId, uuid: $uuid, voteCount: $voteCount)';
   }
 
   @override
@@ -162,13 +186,15 @@ class _$VoteEntityImpl implements _VoteEntity {
                 other.candidateId == candidateId) &&
             (identical(other.votedAt, votedAt) || other.votedAt == votedAt) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.uuid, uuid) || other.uuid == uuid));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, candidateId, votedAt, userId, uuid);
+      Object.hash(runtimeType, candidateId, votedAt, userId, uuid, voteCount);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +215,8 @@ abstract class _VoteEntity implements VoteEntity {
       {required final String candidateId,
       required final DateTime votedAt,
       required final String userId,
-      required final String uuid}) = _$VoteEntityImpl;
+      required final String uuid,
+      required final int voteCount}) = _$VoteEntityImpl;
 
   factory _VoteEntity.fromJson(Map<String, dynamic> json) =
       _$VoteEntityImpl.fromJson;
@@ -202,6 +229,8 @@ abstract class _VoteEntity implements VoteEntity {
   String get userId;
   @override
   String get uuid;
+  @override
+  int get voteCount;
   @override
   @JsonKey(ignore: true)
   _$$VoteEntityImplCopyWith<_$VoteEntityImpl> get copyWith =>

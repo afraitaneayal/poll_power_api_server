@@ -11,7 +11,7 @@ _$CandidateEntityImpl _$$CandidateEntityImplFromJson(
     _$CandidateEntityImpl(
       slogan: json['slogan'] as String,
       speech: json['speech'] as String,
-      voteCount: json['voteCount'] as String,
+      voteCount: json['voteCount'] as int,
       uuid: json['uuid'] as String,
       user: UserEntity.fromJson(json['user'] as Map<String, dynamic>),
     );
