@@ -62,7 +62,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       });
     } catch (e, stackTrace) {
       print(e.toString());
-      return LoginUserResponse.response500(
+      return LoginUserResponse.response400(
           BadRequestError(stackTrace.toString()).getAPIError());
     }
   }
@@ -121,11 +121,13 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       return await result.fold((l) {
         return SignUpCandidateResponse.response500(errorSigningCandidate(l));
       }, (r) {
-        return SignUpCandidateResponse.response201(
-            Candidate.fromJson(r.toJson()));
+        return SignUpCandidateResponse.response201(Candidate(
+            slogan: r.slogan,
+            voteCount: r.vote_count,
+            user: User.fromJson(r.user.toJson())));
       });
     } catch (e, stackTrace) {
-      print(e.toString());
+      print(stackTrace.toString());
       return SignUpCandidateResponse.response400(
           BadRequestError(stackTrace.toString()).getAPIError());
     }

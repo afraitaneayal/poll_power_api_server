@@ -7,7 +7,6 @@ import 'package:poll_power_api_server/data/datasources/candidate/i_candidate_dat
 import 'package:poll_power_api_server/di.dart';
 import 'package:poll_power_api_server/domain/entities/candidate/candidate.dart';
 import 'package:poll_power_api_server/domain/entities/user/user.dart';
-import 'package:poll_power_api_server/domain/entities/vote/vote.dart';
 import 'package:poll_power_api_server/domain/params/candidate/create_candidate_param.dart';
 import 'package:poll_power_api_server/domain/params/candidate/get_candidate_param.dart';
 import 'package:poll_power_api_server/domain/params/user/get_user_param.dart';
@@ -33,7 +32,7 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
             speech: param.speech ?? "",
             user: UserCreateNestedOneWithoutCandidateInput(
                 create: PrismaUnion.$1(UserCreateWithoutCandidateInput(
-                    uuid: param.user.uuid,
+                    uuid: locator.get<IUuidHelper>().generateUuid(),
                     firstName: param.user.first_name,
                     lastName: param.user.last_name,
                     email: param.user.email,
@@ -56,30 +55,29 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   }
 
   @override
-  Future<CandidateEntity> transform(p) async {
-    final Candidate param = p as Candidate;
-    final vote = (p.vote != null)
+  Future<CandidateEntity> transform(param) async {
+    final Candidate p = param as Candidate;
+    final int vote = (param.vote != null)
         ? (await locator
                 .get<GetVotesUsecase>()
-                .trigger(GetVoteParam(candidateUuid: param.uuid!)))
+                .trigger(GetVoteParam(candidateUuid: p.uuid!)))
             .fold((l) => null, (r) => r)!
             .voteCount
         : 0;
-    final Either<ServerError, UserEntity?> userResult = await locator
-        .get<GetUserUsecase>()
-        .trigger(GetUserParam(param.userUuid!));
-    final user = userResult.fold((l) => null, (r) => r);
+    final Either<ServerError, UserEntity?> userResult =
+        await locator.get<GetUserUsecase>().trigger(GetUserParam(p.userUuid!));
+    final UserEntity? user = userResult.fold((l) => null, (r) => r);
     return CandidateEntity(
-        slogan: param.slogan!,
-        speech: param.speech!,
-        voteCount: vote,
-        uuid: param.uuid!,
+        slogan: p.slogan!,
+        speech: p.speech!,
+        vote_count: vote,
+        uuid: p.uuid!,
         user: user!);
   }
 
   @override
   Future<List<CandidateEntity>> getAllCandidate() async {
-    final candidates = await _client.candidate.findMany();
+    final Iterable<Candidate> candidates = await _client.candidate.findMany();
     return Future.wait(
         candidates.map((e) async => await transform(e)).toList());
   }

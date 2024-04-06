@@ -20,7 +20,7 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserEntity {
-  String get uuid => throw _privateConstructorUsedError;
+  String? get uuid => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get first_name => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $UserEntityCopyWith<$Res> {
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
   $Res call(
-      {String uuid,
+      {String? uuid,
       String email,
       String password,
       String first_name,
@@ -65,7 +65,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = null,
+    Object? uuid = freezed,
     Object? email = null,
     Object? password = null,
     Object? first_name = null,
@@ -75,10 +75,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
-      uuid: null == uuid
+      uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String uuid,
+      {String? uuid,
       String email,
       String password,
       String first_name,
@@ -141,7 +141,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = null,
+    Object? uuid = freezed,
     Object? email = null,
     Object? password = null,
     Object? first_name = null,
@@ -151,10 +151,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? image = freezed,
   }) {
     return _then(_$UserEntityImpl(
-      uuid: null == uuid
+      uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -204,7 +204,7 @@ class _$UserEntityImpl implements _UserEntity {
       _$$UserEntityImplFromJson(json);
 
   @override
-  final String uuid;
+  final String? uuid;
   @override
   final String email;
   @override
@@ -265,7 +265,7 @@ class _$UserEntityImpl implements _UserEntity {
 
 abstract class _UserEntity implements UserEntity {
   const factory _UserEntity(
-      {required final String uuid,
+      {required final String? uuid,
       required final String email,
       required final String password,
       required final String first_name,
@@ -278,7 +278,7 @@ abstract class _UserEntity implements UserEntity {
       _$UserEntityImpl.fromJson;
 
   @override
-  String get uuid;
+  String? get uuid;
   @override
   String get email;
   @override

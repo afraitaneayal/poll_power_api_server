@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
 import 'package:poll_power_api_server/common/error/errors.dart';
@@ -36,13 +35,13 @@ class LocalVoteDatasourceImpl implements IVoteDatasourceRepository {
   }
 
   @override
-  VoteEntity transform(p) {
-    final param = p as Vote;
+  VoteEntity transform(param) {
+    final p = param as Vote;
     return VoteEntity(
-        candidateId: param.candidateUuid!,
-        votedAt: param.votedAt!,
-        userId: param.userUuid!,
-        uuid: param.uuid!,
-        voteCount: param.voteCount!);
+        candidateId: p.candidateUuid!,
+        votedAt: p.votedAt!,
+        userId: p.userUuid!,
+        uuid: p.uuid!,
+        voteCount: p.voteCount!);
   }
 }

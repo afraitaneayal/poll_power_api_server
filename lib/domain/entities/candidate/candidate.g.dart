@@ -11,7 +11,7 @@ _$CandidateEntityImpl _$$CandidateEntityImplFromJson(
     _$CandidateEntityImpl(
       slogan: json['slogan'] as String,
       speech: json['speech'] as String,
-      voteCount: json['voteCount'] as int,
+      vote_count: json['vote_count'] as int,
       uuid: json['uuid'] as String,
       user: UserEntity.fromJson(json['user'] as Map<String, dynamic>),
     );
@@ -21,7 +21,7 @@ Map<String, dynamic> _$$CandidateEntityImplToJson(
     <String, dynamic>{
       'slogan': instance.slogan,
       'speech': instance.speech,
-      'voteCount': instance.voteCount,
+      'vote_count': instance.vote_count,
       'uuid': instance.uuid,
       'user': instance.user,
     };

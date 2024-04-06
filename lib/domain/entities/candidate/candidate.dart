@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../user/user.dart';
@@ -10,7 +12,7 @@ class CandidateEntity with _$CandidateEntity {
   const factory CandidateEntity({
     required String slogan,
     required String speech,
-    required int voteCount,
+    required int vote_count,
     required String uuid,
     required UserEntity user,
   }) = _CandidateEntity;

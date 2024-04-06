@@ -72,16 +72,16 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   }
 
   @override
-  UserEntity transform(p) {
-    final User param = p as User;
+  UserEntity transform(param) {
+    final User p = param as User;
     return UserEntity(
-        uuid: param.uuid!,
-        email: param.email!,
-        password: param.password!,
-        first_name: param.firstName!,
-        last_name: param.lastName!,
-        grade: param.grade!,
-        area_of_study: param.areaOfStudy!,
-        image: param.image);
+        uuid: p.uuid!,
+        email: p.email!,
+        password: p.password!,
+        first_name: p.firstName!,
+        last_name: p.lastName!,
+        grade: p.grade!,
+        area_of_study: p.areaOfStudy!,
+        image: p.image);
   }
 }

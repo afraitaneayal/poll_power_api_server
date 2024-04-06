@@ -22,7 +22,7 @@ CandidateEntity _$CandidateEntityFromJson(Map<String, dynamic> json) {
 mixin _$CandidateEntity {
   String get slogan => throw _privateConstructorUsedError;
   String get speech => throw _privateConstructorUsedError;
-  int get voteCount => throw _privateConstructorUsedError;
+  int get vote_count => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   UserEntity get user => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $CandidateEntityCopyWith<$Res> {
   $Res call(
       {String slogan,
       String speech,
-      int voteCount,
+      int vote_count,
       String uuid,
       UserEntity user});
 
@@ -63,7 +63,7 @@ class _$CandidateEntityCopyWithImpl<$Res, $Val extends CandidateEntity>
   $Res call({
     Object? slogan = null,
     Object? speech = null,
-    Object? voteCount = null,
+    Object? vote_count = null,
     Object? uuid = null,
     Object? user = null,
   }) {
@@ -76,9 +76,9 @@ class _$CandidateEntityCopyWithImpl<$Res, $Val extends CandidateEntity>
           ? _value.speech
           : speech // ignore: cast_nullable_to_non_nullable
               as String,
-      voteCount: null == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
+      vote_count: null == vote_count
+          ? _value.vote_count
+          : vote_count // ignore: cast_nullable_to_non_nullable
               as int,
       uuid: null == uuid
           ? _value.uuid
@@ -111,7 +111,7 @@ abstract class _$$CandidateEntityImplCopyWith<$Res>
   $Res call(
       {String slogan,
       String speech,
-      int voteCount,
+      int vote_count,
       String uuid,
       UserEntity user});
 
@@ -132,7 +132,7 @@ class __$$CandidateEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? slogan = null,
     Object? speech = null,
-    Object? voteCount = null,
+    Object? vote_count = null,
     Object? uuid = null,
     Object? user = null,
   }) {
@@ -145,9 +145,9 @@ class __$$CandidateEntityImplCopyWithImpl<$Res>
           ? _value.speech
           : speech // ignore: cast_nullable_to_non_nullable
               as String,
-      voteCount: null == voteCount
-          ? _value.voteCount
-          : voteCount // ignore: cast_nullable_to_non_nullable
+      vote_count: null == vote_count
+          ? _value.vote_count
+          : vote_count // ignore: cast_nullable_to_non_nullable
               as int,
       uuid: null == uuid
           ? _value.uuid
@@ -167,7 +167,7 @@ class _$CandidateEntityImpl implements _CandidateEntity {
   const _$CandidateEntityImpl(
       {required this.slogan,
       required this.speech,
-      required this.voteCount,
+      required this.vote_count,
       required this.uuid,
       required this.user});
 
@@ -179,7 +179,7 @@ class _$CandidateEntityImpl implements _CandidateEntity {
   @override
   final String speech;
   @override
-  final int voteCount;
+  final int vote_count;
   @override
   final String uuid;
   @override
@@ -187,7 +187,7 @@ class _$CandidateEntityImpl implements _CandidateEntity {
 
   @override
   String toString() {
-    return 'CandidateEntity(slogan: $slogan, speech: $speech, voteCount: $voteCount, uuid: $uuid, user: $user)';
+    return 'CandidateEntity(slogan: $slogan, speech: $speech, vote_count: $vote_count, uuid: $uuid, user: $user)';
   }
 
   @override
@@ -197,8 +197,8 @@ class _$CandidateEntityImpl implements _CandidateEntity {
             other is _$CandidateEntityImpl &&
             (identical(other.slogan, slogan) || other.slogan == slogan) &&
             (identical(other.speech, speech) || other.speech == speech) &&
-            (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount) &&
+            (identical(other.vote_count, vote_count) ||
+                other.vote_count == vote_count) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.user, user) || other.user == user));
   }
@@ -206,7 +206,7 @@ class _$CandidateEntityImpl implements _CandidateEntity {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, slogan, speech, voteCount, uuid, user);
+      Object.hash(runtimeType, slogan, speech, vote_count, uuid, user);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +227,7 @@ abstract class _CandidateEntity implements CandidateEntity {
   const factory _CandidateEntity(
       {required final String slogan,
       required final String speech,
-      required final int voteCount,
+      required final int vote_count,
       required final String uuid,
       required final UserEntity user}) = _$CandidateEntityImpl;
 
@@ -239,7 +239,7 @@ abstract class _CandidateEntity implements CandidateEntity {
   @override
   String get speech;
   @override
-  int get voteCount;
+  int get vote_count;
   @override
   String get uuid;
   @override
