@@ -26,7 +26,7 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   @override
   Future<Either<ServerError, CandidateEntity>> createCandidate(
       CreateCandidateParam param) async {
-    if (isEmailAlreadyExist()) {
+    if (await isEmailAlreadyExist(param.user.email)) {
       return left(EmailAlreadyExist(''));
     } else {
       final Candidate candidate = await _client.candidate.create(
@@ -87,7 +87,9 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
         candidates.map((e) async => await transform(e)).toList());
   }
 
-  bool isEmailAlreadyExist() {
-    return false;
+  Future<bool> isEmailAlreadyExist(String email) async {
+    final user = await _client.user
+        .findFirst(where: UserWhereInput(email: PrismaUnion.$2(email)));
+    return user == null;
   }
 }

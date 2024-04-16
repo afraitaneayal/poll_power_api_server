@@ -28,7 +28,7 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
   @override
   Future<Either<ServerError, UserEntity>> createUser(
       CreateUserParam param) async {
-    if (isEmailAlreadyExist()) {
+    if (await isEmailAlreadyExist(param.email)) {
       return left(EmailAlreadyExist(''));
     } else {
       final userResult = await _client.user.create(
@@ -90,7 +90,9 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
         image: p.image);
   }
 
-  bool isEmailAlreadyExist() {
-    return true;
+  Future<bool> isEmailAlreadyExist(String email) async {
+    final user = await _client.user
+        .findFirst(where: UserWhereInput(email: PrismaUnion.$2(email)));
+    return user != null;
   }
 }
