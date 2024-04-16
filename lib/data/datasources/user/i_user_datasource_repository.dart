@@ -8,7 +8,7 @@ import 'package:poll_power_api_server/domain/params/user/get_user_param.dart';
 import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 
 abstract class IUserDatasourceRepository with TransformTo {
-  Future<UserEntity> createUser(CreateUserParam param);
+  Future<Either<ServerError, UserEntity>> createUser(CreateUserParam param);
   Future<Either<ServerError, JwtObject>> logUser(LogUserParam param);
   Future<UserEntity?> getUser(GetUserParam param);
 }

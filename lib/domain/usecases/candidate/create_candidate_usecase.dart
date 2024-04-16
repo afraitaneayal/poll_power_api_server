@@ -17,7 +17,8 @@ class CreateCandidateUsecase
   @override
   Future<Either<ServerError, CandidateEntity>> trigger(
       CreateCandidateParam param) async {
-    return await ErrorCatcher.tryCatch(
+    final candidate = await ErrorCatcher.tryCatch(
         _candidateRepository.createCandidate(param));
+    return candidate.fold((l) => left(l), (r) => r);
   }
 }

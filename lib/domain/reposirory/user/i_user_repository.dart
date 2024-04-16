@@ -7,7 +7,7 @@ import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import '../../entities/user/user.dart';
 
 abstract class IUserRepository {
-  Future<UserEntity> createUser(CreateUserParam param);
+  Future<Either<ServerError, UserEntity>> createUser(CreateUserParam param);
 
   Future<Either<ServerError, JwtObject>> logUser(LogUserParam param);
 

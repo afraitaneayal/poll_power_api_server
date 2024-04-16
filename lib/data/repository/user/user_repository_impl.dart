@@ -16,7 +16,8 @@ class UserRepositoryImpl implements IUserRepository {
   UserRepositoryImpl(this._userDatasourceRepository);
 
   @override
-  Future<UserEntity> createUser(CreateUserParam param) async {
+  Future<Either<ServerError, UserEntity>> createUser(
+      CreateUserParam param) async {
     return await _userDatasourceRepository.createUser(param);
   }
 

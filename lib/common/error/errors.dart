@@ -137,6 +137,22 @@ class UserNotFoundError extends GenericServerError with APIErrorHelper {
             devMessage: (stackTrace.isEmpty)
                 ? "User not found in the system"
                 : stackTrace,
-            userFriendlyMessage: "User not found"));
+            userFriendlyMessage: "Invalid email or password"));
+  }
+}
+
+class EmailAlreadyExist extends GenericServerError with APIErrorHelper {
+  final String stackTrace;
+  EmailAlreadyExist(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  @override
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorContent(
+            devMessage: (stackTrace.isEmpty)
+                ? "User already in the system"
+                : stackTrace,
+            userFriendlyMessage: "Email already exist"));
   }
 }

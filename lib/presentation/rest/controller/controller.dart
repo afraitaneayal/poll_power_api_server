@@ -16,6 +16,7 @@ APIError errorSigningCandidate(ServerError l) =>
     ErrorWhileSigningUser(l.getError()).getAPIError();
 final userNotFound = UserNotFoundError("").getAPIError();
 final tokenNotFound = TokenNotFoundError("").getAPIError();
+final emailAlreadyExist = EmailAlreadyExist("").getAPIError();
 
 class PollPowerAPIContractImpl extends PollPowerAPIContract {
   final OpenApiRequest _request;
@@ -51,18 +52,17 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       final result = await _usecases.logUserUsecase.trigger(param);
       return result.fold((l) {
         if (l is InvalidCredentialsError) {
-          return LoginUserResponse.response500(l.getAPIError());
+          return LoginUserResponse.response400(l.getAPIError());
         } else if (l is UserNotFoundError) {
-          return LoginUserResponse.response500(userNotFound);
-        } else {
-          return LoginUserResponse.response500(internalServerError(l));
+          return LoginUserResponse.response400(userNotFound);
         }
+        return LoginUserResponse.response500(internalServerError(l));
       }, (r) {
         return LoginUserResponse.response200(JWTresponse.fromJson(r.toJson()));
       });
     } catch (e, stackTrace) {
       print(e.toString());
-      return LoginUserResponse.response400(
+      return LoginUserResponse.response500(
           BadRequestError(stackTrace.toString()).getAPIError());
     }
   }
@@ -119,6 +119,9 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       final param = ControllerHelper.transformCandidate(body);
       final result = await _usecases.createCandidateUsecase.trigger(param);
       return await result.fold((l) {
+        if (l is EmailAlreadyExist) {
+          return SignUpCandidateResponse.response400(emailAlreadyExist);
+        }
         return SignUpCandidateResponse.response500(errorSigningCandidate(l));
       }, (r) {
         return SignUpCandidateResponse.response201(Candidate(
@@ -145,6 +148,9 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       final param = ControllerHelper.transformUser(body);
       final result = await _usecases.createUserUsecase.trigger(param);
       return await result.fold((l) {
+        if (l is EmailAlreadyExist) {
+          return SignUpUserResponse.response400(emailAlreadyExist);
+        }
         return SignUpUserResponse.response500(errorSigningCandidate(l));
       }, (r) {
         print(r.toJson());
@@ -152,7 +158,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       });
     } catch (e, stackTrace) {
       print(stackTrace.toString());
-      return SignUpUserResponse.response400(
+      return SignUpUserResponse.response500(
           BadRequestError(stackTrace.toString()).getAPIError());
     }
   }

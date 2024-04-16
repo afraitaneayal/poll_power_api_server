@@ -24,24 +24,29 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   LocalCandidateDatasourceImp(@Named('prisma') this._client);
 
   @override
-  Future<CandidateEntity> createCandidate(CreateCandidateParam param) async {
-    final Candidate candidate = await _client.candidate.create(
-        data: PrismaUnion.$1(CandidateCreateInput(
-            uuid: locator.get<IUuidHelper>().generateUuid(),
-            slogan: param.slogan,
-            speech: param.speech ?? "",
-            user: UserCreateNestedOneWithoutCandidateInput(
-                create: PrismaUnion.$1(UserCreateWithoutCandidateInput(
-                    uuid: locator.get<IUuidHelper>().generateUuid(),
-                    firstName: param.user.first_name,
-                    lastName: param.user.last_name,
-                    email: param.user.email,
-                    password: param.user.password,
-                    image: param.user.image ?? "",
-                    grade: param.user.grade,
-                    areaOfStudy: param.user.area_of_study))))));
+  Future<Either<ServerError, CandidateEntity>> createCandidate(
+      CreateCandidateParam param) async {
+    if (isEmailAlreadyExist()) {
+      return left(EmailAlreadyExist(''));
+    } else {
+      final Candidate candidate = await _client.candidate.create(
+          data: PrismaUnion.$1(CandidateCreateInput(
+              uuid: locator.get<IUuidHelper>().generateUuid(),
+              slogan: param.slogan,
+              speech: param.speech ?? "",
+              user: UserCreateNestedOneWithoutCandidateInput(
+                  create: PrismaUnion.$1(UserCreateWithoutCandidateInput(
+                      uuid: locator.get<IUuidHelper>().generateUuid(),
+                      firstName: param.user.first_name,
+                      lastName: param.user.last_name,
+                      email: param.user.email,
+                      password: param.user.password,
+                      image: param.user.image ?? "",
+                      grade: param.user.grade,
+                      areaOfStudy: param.user.area_of_study))))));
 
-    return transform(candidate);
+      return right(await transform(candidate));
+    }
   }
 
   @override
@@ -80,5 +85,9 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
     final Iterable<Candidate> candidates = await _client.candidate.findMany();
     return Future.wait(
         candidates.map((e) async => await transform(e)).toList());
+  }
+
+  bool isEmailAlreadyExist() {
+    return false;
   }
 }

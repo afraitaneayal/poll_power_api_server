@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/data/datasources/candidate/i_candidate_datasource_repository.dart';
 import 'package:poll_power_api_server/domain/entities/candidate/candidate.dart';
 import 'package:poll_power_api_server/domain/params/candidate/create_candidate_param.dart';
@@ -12,7 +14,8 @@ class CandidateRepositoryImpl implements ICandidateRepository {
   CandidateRepositoryImpl(this._candidateDatasourceRepository);
 
   @override
-  Future<CandidateEntity> createCandidate(CreateCandidateParam param) async {
+  Future<Either<ServerError, CandidateEntity>> createCandidate(
+      CreateCandidateParam param) async {
     return await _candidateDatasourceRepository.createCandidate(param);
   }
 

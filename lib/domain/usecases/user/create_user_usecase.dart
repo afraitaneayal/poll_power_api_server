@@ -16,6 +16,6 @@ class CreateUserUsecase implements Usecase<CreateUserParam, UserEntity> {
   @override
   Future<Either<ServerError, UserEntity>> trigger(CreateUserParam param) async {
     final user = await ErrorCatcher.tryCatch(_userRepository.createUser(param));
-    return user;
+    return user.fold((l) => left(l), (r) => r);
   }
 }

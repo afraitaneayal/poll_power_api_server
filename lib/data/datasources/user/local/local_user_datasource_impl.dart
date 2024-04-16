@@ -26,19 +26,24 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
       @Named('prisma') this._client, @Named('authKey') this._key);
 
   @override
-  Future<UserEntity> createUser(CreateUserParam param) async {
-    final userResult = await _client.user.create(
-        data: PrismaUnion.$1(UserCreateInput(
-            uuid: locator.get<IUuidHelper>().generateUuid(),
-            firstName: param.firstName,
-            lastName: param.lastName,
-            email: param.email,
-            password: param.password,
-            image: param.image,
-            grade: param.grade,
-            areaOfStudy: param.areaOfStudy)));
+  Future<Either<ServerError, UserEntity>> createUser(
+      CreateUserParam param) async {
+    if (isEmailAlreadyExist()) {
+      return left(EmailAlreadyExist(''));
+    } else {
+      final userResult = await _client.user.create(
+          data: PrismaUnion.$1(UserCreateInput(
+              uuid: locator.get<IUuidHelper>().generateUuid(),
+              firstName: param.firstName,
+              lastName: param.lastName,
+              email: param.email,
+              password: param.password,
+              image: param.image,
+              grade: param.grade,
+              areaOfStudy: param.areaOfStudy)));
 
-    return transform(userResult);
+      return right(transform(userResult));
+    }
   }
 
   @override
@@ -83,5 +88,9 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
         grade: p.grade!,
         area_of_study: p.areaOfStudy!,
         image: p.image);
+  }
+
+  bool isEmailAlreadyExist() {
+    return true;
   }
 }
