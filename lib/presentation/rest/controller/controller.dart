@@ -48,7 +48,8 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
   @override
   Future<LoginUserResponse> loginUser(UserLoginRequest body) async {
     try {
-      final LogUserParam param = LogUserParam(body.email!, body.password!);
+      final LogUserParam param =
+          LogUserParam(body.email!, body.password!, body.appKey!);
       final result = await _usecases.logUserUsecase.trigger(param);
       return result.fold((l) {
         if (l is InvalidCredentialsError) {
@@ -90,7 +91,7 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
         if (uuid == null || !isTokenValid) {
           return VoteCandidateResponse.response401(invalidToken);
         } else {
-          final param = CreateVoteParam(body.candidateId, uuid);
+          final param = CreateVoteParam(body.candidateId ?? "", uuid);
           final result = await _usecases.createVoteUsecase.trigger(param);
           return result.fold((l) {
             return VoteCandidateResponse.response500(internalServerError(l));

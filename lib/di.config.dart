@@ -11,11 +11,12 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import 'common/helpers/app_key_helper/app_key_helper.dart' as _i15;
 import 'common/helpers/password_helper/password_helper.dart' as _i9;
 import 'common/helpers/token_helper/token_helper.dart' as _i10;
 import 'common/helpers/uuid_helper/uuid_helper.dart' as _i4;
-import 'common/modules/auth_secrets.dart' as _i30;
-import 'common/modules/db_module.dart' as _i29;
+import 'common/modules/auth_secrets.dart' as _i31;
+import 'common/modules/db_module.dart' as _i30;
 import 'data/datasources/candidate/i_candidate_datasource_repository.dart'
     as _i5;
 import 'data/datasources/candidate/local/local_candidate_datasource_impl.dart'
@@ -26,22 +27,22 @@ import 'data/datasources/vote/i_vote_datasource_repository.dart' as _i7;
 import 'data/datasources/vote/local/local_vote_datasource_repository_impl.dart'
     as _i8;
 import 'data/repository/candidate/candidate_repository_impl.dart' as _i14;
-import 'data/repository/user/user_repository_impl.dart' as _i21;
-import 'data/repository/vote/vote_repository_impl.dart' as _i16;
+import 'data/repository/user/user_repository_impl.dart' as _i22;
+import 'data/repository/vote/vote_repository_impl.dart' as _i17;
 import 'domain/reposirory/candidate/i_candidate_repository.dart' as _i13;
-import 'domain/reposirory/user/i_user_repository.dart' as _i20;
-import 'domain/reposirory/vote/i_vote_repository.dart' as _i15;
-import 'domain/usecases/candidate/create_candidate_usecase.dart' as _i19;
-import 'domain/usecases/candidate/get_all_candidate_usecase.dart' as _i18;
-import 'domain/usecases/candidate/get_candidate_usecase.dart' as _i17;
-import 'domain/usecases/user/create_user_usecase.dart' as _i26;
-import 'domain/usecases/user/get_user_usecase.dart' as _i25;
-import 'domain/usecases/user/log_user_uscase.dart' as _i24;
-import 'domain/usecases/vote/create_vote_usecase.dart' as _i23;
-import 'domain/usecases/vote/get_votes_usecase.dart' as _i22;
+import 'domain/reposirory/user/i_user_repository.dart' as _i21;
+import 'domain/reposirory/vote/i_vote_repository.dart' as _i16;
+import 'domain/usecases/candidate/create_candidate_usecase.dart' as _i20;
+import 'domain/usecases/candidate/get_all_candidate_usecase.dart' as _i19;
+import 'domain/usecases/candidate/get_candidate_usecase.dart' as _i18;
+import 'domain/usecases/user/create_user_usecase.dart' as _i27;
+import 'domain/usecases/user/get_user_usecase.dart' as _i26;
+import 'domain/usecases/user/log_user_uscase.dart' as _i25;
+import 'domain/usecases/vote/create_vote_usecase.dart' as _i24;
+import 'domain/usecases/vote/get_votes_usecase.dart' as _i23;
 import 'gen/prisma/client.dart' as _i3;
-import 'presentation/rest/api_endpoint_provider.dart' as _i28;
-import 'presentation/usecases.dart' as _i27;
+import 'presentation/rest/api_endpoint_provider.dart' as _i29;
+import 'presentation/usecases.dart' as _i28;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -101,42 +102,44 @@ extension GetItInjectableX on _i1.GetIt {
             ));
     gh.lazySingleton<_i13.ICandidateRepository>(() =>
         _i14.CandidateRepositoryImpl(gh<_i5.ICandidateDatasourceRepository>()));
-    gh.lazySingleton<_i15.IVoteRepository>(
-        () => _i16.VoteRepositoryImpl(gh<_i7.IVoteDatasourceRepository>()));
-    gh.singleton<_i17.GetCandidateUsecase>(
-        () => _i17.GetCandidateUsecase(gh<_i13.ICandidateRepository>()));
-    gh.singleton<_i18.GetAllCandidateUsecase>(
-        () => _i18.GetAllCandidateUsecase(gh<_i13.ICandidateRepository>()));
-    gh.singleton<_i19.CreateCandidateUsecase>(
-        () => _i19.CreateCandidateUsecase(gh<_i13.ICandidateRepository>()));
-    gh.lazySingleton<_i20.IUserRepository>(
-        () => _i21.UserRepositoryImpl(gh<_i11.IUserDatasourceRepository>()));
-    gh.singleton<_i22.GetVotesUsecase>(
-        () => _i22.GetVotesUsecase(gh<_i15.IVoteRepository>()));
-    gh.singleton<_i23.CreateVoteUsecase>(
-        () => _i23.CreateVoteUsecase(gh<_i15.IVoteRepository>()));
-    gh.singleton<_i24.LogUserUsecase>(
-        () => _i24.LogUserUsecase(gh<_i20.IUserRepository>()));
-    gh.singleton<_i25.GetUserUsecase>(
-        () => _i25.GetUserUsecase(gh<_i20.IUserRepository>()));
-    gh.singleton<_i26.CreateUserUsecase>(
-        () => _i26.CreateUserUsecase(gh<_i20.IUserRepository>()));
-    gh.singleton<_i27.Usecases>(() => _i27.Usecases(
-          gh<_i19.CreateCandidateUsecase>(),
-          gh<_i17.GetCandidateUsecase>(),
-          gh<_i26.CreateUserUsecase>(),
-          gh<_i25.GetUserUsecase>(),
-          gh<_i23.CreateVoteUsecase>(),
-          gh<_i22.GetVotesUsecase>(),
-          gh<_i18.GetAllCandidateUsecase>(),
-          gh<_i24.LogUserUsecase>(),
+    gh.singleton<_i15.IAppKeyHelper>(
+        () => _i15.AppKeyHelperImpl(gh<String>(instanceName: 'appKey')));
+    gh.lazySingleton<_i16.IVoteRepository>(
+        () => _i17.VoteRepositoryImpl(gh<_i7.IVoteDatasourceRepository>()));
+    gh.singleton<_i18.GetCandidateUsecase>(
+        () => _i18.GetCandidateUsecase(gh<_i13.ICandidateRepository>()));
+    gh.singleton<_i19.GetAllCandidateUsecase>(
+        () => _i19.GetAllCandidateUsecase(gh<_i13.ICandidateRepository>()));
+    gh.singleton<_i20.CreateCandidateUsecase>(
+        () => _i20.CreateCandidateUsecase(gh<_i13.ICandidateRepository>()));
+    gh.lazySingleton<_i21.IUserRepository>(
+        () => _i22.UserRepositoryImpl(gh<_i11.IUserDatasourceRepository>()));
+    gh.singleton<_i23.GetVotesUsecase>(
+        () => _i23.GetVotesUsecase(gh<_i16.IVoteRepository>()));
+    gh.singleton<_i24.CreateVoteUsecase>(
+        () => _i24.CreateVoteUsecase(gh<_i16.IVoteRepository>()));
+    gh.singleton<_i25.LogUserUsecase>(
+        () => _i25.LogUserUsecase(gh<_i21.IUserRepository>()));
+    gh.singleton<_i26.GetUserUsecase>(
+        () => _i26.GetUserUsecase(gh<_i21.IUserRepository>()));
+    gh.singleton<_i27.CreateUserUsecase>(
+        () => _i27.CreateUserUsecase(gh<_i21.IUserRepository>()));
+    gh.singleton<_i28.Usecases>(() => _i28.Usecases(
+          gh<_i20.CreateCandidateUsecase>(),
+          gh<_i18.GetCandidateUsecase>(),
+          gh<_i27.CreateUserUsecase>(),
+          gh<_i26.GetUserUsecase>(),
+          gh<_i24.CreateVoteUsecase>(),
+          gh<_i23.GetVotesUsecase>(),
+          gh<_i19.GetAllCandidateUsecase>(),
+          gh<_i25.LogUserUsecase>(),
         ));
-    gh.singleton<_i28.PollPowerAPIEndpointProvider>(
-        () => _i28.PollPowerAPIEndpointProvider(gh<_i27.Usecases>()));
+    gh.singleton<_i29.PollPowerAPIEndpointProvider>(
+        () => _i29.PollPowerAPIEndpointProvider(gh<_i28.Usecases>()));
     return this;
   }
 }
 
-class _$DbModule extends _i29.DbModule {}
+class _$DbModule extends _i30.DbModule {}
 
-class _$AuthSecrets extends _i30.AuthSecrets {}
+class _$AuthSecrets extends _i31.AuthSecrets {}

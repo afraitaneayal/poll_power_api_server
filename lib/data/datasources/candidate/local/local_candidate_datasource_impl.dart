@@ -90,6 +90,6 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   Future<bool> isEmailAlreadyExist(String email) async {
     final user = await _client.user
         .findFirst(where: UserWhereInput(email: PrismaUnion.$2(email)));
-    return user == null;
+    return user != null;
   }
 }

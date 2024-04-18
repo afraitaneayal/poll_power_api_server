@@ -46,7 +46,7 @@ Future<void> testCandidateSignup() async {
     final CreateCandidateParam param =
         CreateCandidateParam("slogan", "yeah", user, 0);
     final candidateResult = await createCandidateUsecase.trigger(param);
-    expect(candidateResult.isRight(), equals(true));
+    expect(candidateResult.isLeft(), equals(true));
   });
 }
 
@@ -56,13 +56,14 @@ Future<void> testUserSignup() async {
     final CreateUserParam createUserParam = CreateUserParam(
         "Hamedcuenca5@gmail.com", "MI", "M2", "", "Hc", "Yaya", "21323");
     final userResult = await userUsecase.trigger(createUserParam);
-    expect(userResult.isRight(), equals(true));
+    expect(userResult.isLeft(), equals(true));
   });
 }
 
 Future<void> testUserLogin() async {
   test("test user login", () async {
-    final LogUserParam param = LogUserParam("yayahc@gmail.com", "2432");
+    final LogUserParam param =
+        LogUserParam("yayahc@gmail.com", "2432", "oazpddugzie");
     final Either<ServerError, JwtObject> loginResult =
         await locator.get<LogUserUsecase>().trigger(param);
     expect(loginResult.isRight(), equals(true));
@@ -71,7 +72,7 @@ Future<void> testUserLogin() async {
 
 Future<void> testUserLoginWithoutData() async {
   test("test user login with empty datas", () async {
-    final LogUserParam param = LogUserParam("yayahc@gmail.com", "");
+    final LogUserParam param = LogUserParam("", "", "");
     final Either<ServerError, JwtObject> loginResult =
         await locator.get<LogUserUsecase>().trigger(param);
     print(loginResult.fold((l) => null, (r) => r));
