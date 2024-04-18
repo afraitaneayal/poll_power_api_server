@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
 import 'package:poll_power_api_server/common/error/errors.dart';
+import 'package:poll_power_api_server/common/helpers/password_helper/password_helper.dart';
 import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/candidate/i_candidate_datasource_repository.dart';
 import 'package:poll_power_api_server/di.dart';
@@ -40,7 +41,9 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
                       firstName: param.user.first_name,
                       lastName: param.user.last_name,
                       email: param.user.email,
-                      password: param.user.password,
+                      password: locator
+                          .get<IPasswordHelper>()
+                          .hashPassword(param.user.password),
                       image: param.user.image ?? "",
                       grade: param.user.grade,
                       areaOfStudy: param.user.area_of_study))))));

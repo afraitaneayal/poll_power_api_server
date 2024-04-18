@@ -38,7 +38,8 @@ class LocalUserDatasourceImpl implements IUserDatasourceRepository {
               firstName: param.firstName,
               lastName: param.lastName,
               email: param.email,
-              password: param.password,
+              password:
+                  locator.get<IPasswordHelper>().hashPassword(param.password),
               image: param.image,
               grade: param.grade,
               areaOfStudy: param.areaOfStudy)));

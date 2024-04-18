@@ -11,7 +11,6 @@ class AppKeyHelperImpl implements IAppKeyHelper {
 
   @override
   bool validateAppKey(String key) {
-    // [TODO] Hash local app key and comprare to sended one
     return (key == localAppKey);
   }
 }

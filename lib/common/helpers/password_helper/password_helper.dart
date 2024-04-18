@@ -14,8 +14,7 @@ class PasswordHelperImpl implements IPasswordHelper {
 
   @override
   bool verifyPassword(String passwordFromDB, String passwordFromRequest) {
-    // return (passwordFromDB == hashPassword(passwordFromRequest));
-    return (passwordFromDB == passwordFromRequest);
+    return (passwordFromDB == hashPassword(passwordFromRequest));
   }
 
   @override
