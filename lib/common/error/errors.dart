@@ -137,8 +137,7 @@ class UserNotFoundError extends GenericServerError with APIErrorHelper {
             devMessage: (stackTrace.isEmpty)
                 ? "User not found in the system"
                 : stackTrace,
-            userFriendlyMessage:
-                "User not found in the system Invalid email or password"));
+            userFriendlyMessage: "User not found in the system"));
   }
 }
 

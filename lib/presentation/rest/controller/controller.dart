@@ -57,9 +57,11 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
         if (l is InvalidCredentialsError) {
           return LoginUserResponse.response400(l.getAPIError());
         } else if (l is UserNotFoundError) {
+          print(l.getAPIError());
           return LoginUserResponse.response400(userNotFound);
+        } else {
+          return LoginUserResponse.response500(internalServerError(l));
         }
-        return LoginUserResponse.response500(internalServerError(l));
       }, (r) {
         return LoginUserResponse.response200(JWTresponse.fromJson(r.toJson()));
       });

@@ -486,10 +486,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "513f0c43c42d1dd609f679427e6ba7b851873ff9"
+      resolved-ref: "785b7110fd9de5c34d2200aff5b675468b2f5eca"
       url: "https://github.com/afraitaneayal/poll_power_api_definition"
     source: git
-    version: "1.4.9"
+    version: "1.4.10"
   pool:
     dependency: transitive
     description:
