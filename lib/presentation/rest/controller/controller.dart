@@ -3,6 +3,7 @@ import 'package:poll_power_api_server/common/helpers/bearer_extractor/bearer_ext
 import 'package:poll_power_api_server/common/helpers/controller_helper/controller_helper.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
 import 'package:poll_power_api_server/di.dart';
+import 'package:poll_power_api_server/domain/params/user/get_user_param.dart';
 import 'package:poll_power_api_server/domain/params/user/log_user_param.dart';
 import 'package:poll_power_api_server/domain/params/vote/create_vote_param.dart';
 import 'package:poll_power_api_server/presentation/usecases.dart';
@@ -15,6 +16,7 @@ final APIError invalidToken = InvalidTokenError("Invalid Token").getAPIError();
 APIError errorSigningCandidate(ServerError l) =>
     ErrorWhileSigningUser(l.getError()).getAPIError();
 final userNotFound = UserNotFoundError("").getAPIError();
+final invalidCredentials = InvalidCredentialsError("").getAPIError();
 final tokenNotFound = TokenNotFoundError("").getAPIError();
 final emailAlreadyExist = EmailAlreadyExist("").getAPIError();
 
@@ -161,6 +163,45 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       print(stackTrace.toString());
       return SignUpUserResponse.response500(
           BadRequestError(stackTrace.toString()).getAPIError());
+    }
+  }
+
+  @override
+  Future<GetUserResponse> getUser() async {
+    try {
+      // Basicaly the bearer contain the token so
+      final String? bearer = BearerExtractor.extract(_request);
+
+      if (bearer == null) {
+        return GetUserResponse.response401(tokenNotFound);
+      }
+
+      final isTokenValid = await locator.get<TokenHelper>().verifyToken(bearer);
+      if (!isTokenValid) {
+        return GetUserResponse.response401(invalidToken);
+      } else {
+        final uuid = await locator.get<TokenHelper>().extractUuid(bearer);
+        if (uuid == null || !isTokenValid) {
+          return GetUserResponse.response401(invalidToken);
+        } else {
+          final GetUserParam param = GetUserParam(uuid);
+          final result = await _usecases.getUserUsecase.trigger(param);
+          return result.fold((l) {
+            return GetUserResponse.response500(internalServerError(l));
+          }, (r) {
+            if (r == null) {
+              return GetUserResponse.response401(userNotFound);
+            } else {
+              return GetUserResponse.response200(User.fromJson(r.toJson()));
+            }
+          });
+        }
+      }
+    } catch (e, stackTrace) {
+      print(e.toString());
+      return GetUserResponse.response500(
+          InternalServerErrorWhileProccessing(stackTrace.toString())
+              .getAPIError());
     }
   }
 }
