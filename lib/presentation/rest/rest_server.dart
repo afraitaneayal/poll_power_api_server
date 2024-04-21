@@ -6,7 +6,7 @@ import 'api_endpoint_provider.dart';
 Future<void> startRestServer() async {
   /// Server
   final server = OpenApiShelfServer(
-      PollPowerAPIRouter(locator.get<PollPowerAPIEndpointProvider>()));
+      PollpowerRouter(locator.get<PollPowerAPIEndpointProvider>()));
 
   /// Start the server
   print("starting rest server ...");

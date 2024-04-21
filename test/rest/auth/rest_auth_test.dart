@@ -5,7 +5,7 @@ import '../../poll_power_api_server_test.dart';
 import '../init_reste_test.dart';
 
 Future<void> main() async {
-  final PollPowerAPIClient client = initRestTest();
+  final PollpowerClient client = initRestTest();
   return await isTestDbReady()
       ? group(
           "group description",
@@ -19,7 +19,7 @@ Future<void> main() async {
       : null;
 }
 
-Future<void> testUserSignup(PollPowerAPIClient client) async {
+Future<void> testUserSignup(PollpowerClient client) async {
   test("test user signup with rest endpoint", () async {
     final User user = User(
         email: "email",
@@ -34,7 +34,7 @@ Future<void> testUserSignup(PollPowerAPIClient client) async {
   });
 }
 
-Future<void> testCandidateSignup(PollPowerAPIClient client) async {
+Future<void> testCandidateSignup(PollpowerClient client) async {
   test("test candidate signup using rest", () async {
     final User user = User(
         email: "email",
@@ -51,7 +51,7 @@ Future<void> testCandidateSignup(PollPowerAPIClient client) async {
   });
 }
 
-Future<void> testUserLogin(PollPowerAPIClient client) async {
+Future<void> testUserLogin(PollpowerClient client) async {
   test("test user login with rest endpoint", () async {
     final UserLoginRequest userLoginRequest =
         UserLoginRequest(email: "email", password: "password");
@@ -60,7 +60,7 @@ Future<void> testUserLogin(PollPowerAPIClient client) async {
   });
 }
 
-Future<void> testUserLoginWithBadPassword(PollPowerAPIClient client) async {
+Future<void> testUserLoginWithBadPassword(PollpowerClient client) async {
   test("test user login with rest endpoint", () async {
     final UserLoginRequest userLoginRequest =
         UserLoginRequest(email: "email", password: "");

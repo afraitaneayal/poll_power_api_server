@@ -5,15 +5,14 @@ import 'package:poll_power_openapi/poll_power_openapi.dart';
 import 'controller/controller.dart';
 
 @singleton
-class PollPowerAPIEndpointProvider
-    extends ApiEndpointProvider<PollPowerAPIContract> {
+class PollPowerAPIEndpointProvider extends ApiEndpointProvider<Pollpower> {
   final Usecases _usecases;
 
   PollPowerAPIEndpointProvider(this._usecases);
 
   @override
-  Future<RET> invoke<RET>(OpenApiRequest request,
-      ApiEndpointCallback<PollPowerAPIContract, RET> callback) {
+  Future<RET> invoke<RET>(
+      OpenApiRequest request, ApiEndpointCallback<Pollpower, RET> callback) {
     return callback(PollPowerAPIContractImpl(request, _usecases));
   }
 }

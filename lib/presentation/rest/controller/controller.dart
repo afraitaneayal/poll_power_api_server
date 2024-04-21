@@ -20,7 +20,7 @@ final invalidCredentials = InvalidCredentialsError("").getAPIError();
 final tokenNotFound = TokenNotFoundError("").getAPIError();
 final emailAlreadyExist = EmailAlreadyExist("").getAPIError();
 
-class PollPowerAPIContractImpl extends PollPowerAPIContract {
+class PollPowerAPIContractImpl extends Pollpower {
   final OpenApiRequest _request;
   final Usecases _usecases;
 
@@ -28,10 +28,10 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
 
   @override
   Future<GetCandidatesResponse> getCandidates() async {
-    final String? bearer = BearerExtractor.extract(_request);
-    if (bearer == null) {
-      return GetCandidatesResponse.response401(invalidToken);
-    }
+    // final String? bearer = BearerExtractor.extract(_request);
+    // if (bearer == null) {
+    // return GetCandidatesResponse.response401(invalidToken);
+    // }
 
     final candidatesResult =
         await _usecases.getAllCandidateUsecase.trigger(null);
@@ -39,11 +39,18 @@ class PollPowerAPIContractImpl extends PollPowerAPIContract {
       return GetCandidatesResponse.response500(internalServerError(l));
     }, (r) {
       if (r == null || r.isEmpty) {
-        return GetCandidatesResponse.response200([]);
+        return GetCandidatesResponse.response200(
+            CandidateResponse(candidates: []));
       }
-      final candidates = r.map((e) => e.toJson()).toList();
+      final List<Candidate> candidates = r
+          .map((e) => Candidate(
+              slogan: e.slogan,
+              speech: e.speech,
+              voteCount: e.vote_count,
+              user: User.fromJson(e.user.toJson())))
+          .toList();
       return GetCandidatesResponse.response200(
-          candidates.map((e) => Candidate.fromJson(e)).toList());
+          CandidateResponse(candidates: candidates));
     });
   }
 
