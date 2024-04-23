@@ -29,6 +29,9 @@ dependencies:
       url:
         https://github.com/afraitaneayal/poll_power_api_definition
   crypto: ^3.0.3
+  regexpattern:
+    git:
+      url: https://github.com/yayahc/regexpattern.git
 
 dev_dependencies:
   lints: ^2.1.0

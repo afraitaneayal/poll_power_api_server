@@ -1,4 +1,5 @@
 import 'package:openapi_base/openapi_base.dart';
+import 'package:poll_power_api_server/common/extension/string_extension.dart';
 import 'package:poll_power_api_server/common/helpers/bearer_extractor/bearer_extractor.dart';
 import 'package:poll_power_api_server/common/helpers/controller_helper/controller_helper.dart';
 import 'package:poll_power_api_server/common/helpers/token_helper/token_helper.dart';
@@ -19,6 +20,7 @@ final userNotFound = UserNotFoundError("").getAPIError();
 final invalidCredentials = InvalidCredentialsError("").getAPIError();
 final tokenNotFound = TokenNotFoundError("").getAPIError();
 final emailAlreadyExist = EmailAlreadyExist("").getAPIError();
+final easyPassword = EasyPasswordError('').getAPIError();
 
 class PollPowerAPIContractImpl extends Pollpower {
   final OpenApiRequest _request;
@@ -128,6 +130,9 @@ class PollPowerAPIContractImpl extends Pollpower {
   Future<SignUpCandidateResponse> signUpCandidate(Candidate body) async {
     try {
       final param = ControllerHelper.transformCandidate(body);
+      if (!param.user.password.isValid()) {
+        return SignUpCandidateResponse.response400(easyPassword);
+      }
       final result = await _usecases.createCandidateUsecase.trigger(param);
       return await result.fold((l) {
         if (l is EmailAlreadyExist) {
@@ -156,6 +161,11 @@ class PollPowerAPIContractImpl extends Pollpower {
         return SignUpUserResponse.response400(
             BadRequestError("").getAPIError());
       }
+
+      if (!body.password.isValid()) {
+        return SignUpUserResponse.response400(easyPassword);
+      }
+
       final param = ControllerHelper.transformUser(body);
       final result = await _usecases.createUserUsecase.trigger(param);
       return await result.fold((l) {

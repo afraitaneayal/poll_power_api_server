@@ -5,6 +5,7 @@ import '../../../domain/params/candidate/create_candidate_param.dart';
 
 class ControllerHelper {
   static CreateCandidateParam transformCandidate(Candidate body) {
+    
     return CreateCandidateParam(body.slogan, body.speech ?? "",
         UserEntity.fromJson(body.user.toJson()), body.voteCount);
   }

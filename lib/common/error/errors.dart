@@ -156,3 +156,19 @@ class EmailAlreadyExist extends GenericServerError with APIErrorHelper {
             userFriendlyMessage: "Email already exist"));
   }
 }
+
+class EasyPasswordError extends GenericServerError with APIErrorHelper {
+  final String stackTrace;
+  EasyPasswordError(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  @override
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorError(
+            devMessage: (stackTrace.isEmpty)
+                ? "The password set by user is not strong"
+                : stackTrace,
+            userFriendlyMessage: "The password is not strong"));
+  }
+}
