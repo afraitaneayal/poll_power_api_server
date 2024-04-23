@@ -172,3 +172,19 @@ class EasyPasswordError extends GenericServerError with APIErrorHelper {
             userFriendlyMessage: "The password is not strong"));
   }
 }
+
+class InvalidEmail extends GenericServerError with APIErrorHelper {
+  final String stackTrace;
+  InvalidEmail(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  @override
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorError(
+            devMessage: (stackTrace.isEmpty)
+                ? "The email set by user is not correct"
+                : stackTrace,
+            userFriendlyMessage: "The email is not correct"));
+  }
+}

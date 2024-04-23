@@ -16,11 +16,12 @@ APIError internalServerError(ServerError l) =>
 final APIError invalidToken = InvalidTokenError("Invalid Token").getAPIError();
 APIError errorSigningCandidate(ServerError l) =>
     ErrorWhileSigningUser(l.getError()).getAPIError();
-final userNotFound = UserNotFoundError("").getAPIError();
-final invalidCredentials = InvalidCredentialsError("").getAPIError();
-final tokenNotFound = TokenNotFoundError("").getAPIError();
-final emailAlreadyExist = EmailAlreadyExist("").getAPIError();
-final easyPassword = EasyPasswordError('').getAPIError();
+final APIError userNotFound = UserNotFoundError("").getAPIError();
+final APIError invalidCredentials = InvalidCredentialsError("").getAPIError();
+final APIError tokenNotFound = TokenNotFoundError("").getAPIError();
+final APIError emailAlreadyExist = EmailAlreadyExist("").getAPIError();
+final APIError easyPassword = EasyPasswordError('').getAPIError();
+final APIError incorrectEmail = InvalidEmail('').getAPIError();
 
 class PollPowerAPIContractImpl extends Pollpower {
   final OpenApiRequest _request;
@@ -130,9 +131,15 @@ class PollPowerAPIContractImpl extends Pollpower {
   Future<SignUpCandidateResponse> signUpCandidate(Candidate body) async {
     try {
       final param = ControllerHelper.transformCandidate(body);
-      if (!param.user.password.isValid()) {
+
+      if (!param.user.password.isValidPassword()) {
         return SignUpCandidateResponse.response400(easyPassword);
       }
+
+      if (!param.user.email.isValidEmail()) {
+        return SignUpCandidateResponse.response400(incorrectEmail);
+      }
+
       final result = await _usecases.createCandidateUsecase.trigger(param);
       return await result.fold((l) {
         if (l is EmailAlreadyExist) {
@@ -162,8 +169,11 @@ class PollPowerAPIContractImpl extends Pollpower {
             BadRequestError("").getAPIError());
       }
 
-      if (!body.password.isValid()) {
+      if (!body.password.isValidPassword()) {
         return SignUpUserResponse.response400(easyPassword);
+      }
+      if (!body.email.isValidEmail()) {
+        return SignUpUserResponse.response400(incorrectEmail);
       }
 
       final param = ControllerHelper.transformUser(body);
