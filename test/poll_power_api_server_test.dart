@@ -1,9 +1,5 @@
 import '../bin/main.dart';
 
-void main() {
-  /// Implement test here
-}
-
 Future<bool> isTestDbReady() async {
   // check if test db is use rather than prod db
   // final File file = File("../prisma/schema.prisma");
