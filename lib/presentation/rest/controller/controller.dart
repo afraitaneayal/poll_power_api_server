@@ -47,6 +47,7 @@ class PollPowerAPIContractImpl extends Pollpower {
       }
       final List<Candidate> candidates = r
           .map((e) => Candidate(
+              uuid: e.uuid,
               slogan: e.slogan,
               speech: e.speech,
               voteCount: e.vote_count,
@@ -104,7 +105,8 @@ class PollPowerAPIContractImpl extends Pollpower {
         if (uuid == null || !isTokenValid) {
           return VoteCandidateResponse.response401(invalidToken);
         } else {
-          final param = CreateVoteParam(body.candidateId ?? "", uuid);
+          final param =
+              CreateVoteParam(body.candidateId ?? "", uuid, body.votedAt!);
           final result = await _usecases.createVoteUsecase.trigger(param);
           return result.fold((l) {
             return VoteCandidateResponse.response500(internalServerError(l));

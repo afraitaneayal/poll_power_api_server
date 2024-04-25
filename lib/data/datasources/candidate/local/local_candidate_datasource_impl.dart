@@ -5,15 +5,16 @@ import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/common/helpers/password_helper/password_helper.dart';
 import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/candidate/i_candidate_datasource_repository.dart';
+import 'package:poll_power_api_server/data/datasources/vote/i_vote_datasource_repository.dart';
 import 'package:poll_power_api_server/di.dart';
 import 'package:poll_power_api_server/domain/entities/candidate/candidate.dart';
 import 'package:poll_power_api_server/domain/entities/user/user.dart';
+import 'package:poll_power_api_server/domain/entities/vote/vote.dart';
 import 'package:poll_power_api_server/domain/params/candidate/create_candidate_param.dart';
 import 'package:poll_power_api_server/domain/params/candidate/get_candidate_param.dart';
 import 'package:poll_power_api_server/domain/params/user/get_user_param.dart';
 import 'package:poll_power_api_server/domain/params/vote/get_vote_param.dart';
 import 'package:poll_power_api_server/domain/usecases/user/get_user_usecase.dart';
-import 'package:poll_power_api_server/domain/usecases/vote/get_votes_usecase.dart';
 import 'package:poll_power_api_server/gen/prisma/client.dart';
 import 'package:poll_power_api_server/gen/prisma/model.dart';
 import 'package:poll_power_api_server/gen/prisma/prisma.dart';
@@ -65,20 +66,16 @@ class LocalCandidateDatasourceImp implements ICandidateDatasourceRepository {
   @override
   Future<CandidateEntity> transform(param) async {
     final Candidate p = param as Candidate;
-    final int vote = (param.vote != null)
-        ? (await locator
-                .get<GetVotesUsecase>()
-                .trigger(GetVoteParam(candidateUuid: p.uuid!)))
-            .fold((l) => null, (r) => r)!
-            .voteCount
-        : 0;
+    final VoteEntity? vote = await locator
+        .get<IVoteDatasourceRepository>()
+        .getVote(GetVoteParam(candidateUuid: p.uuid!));
     final Either<ServerError, UserEntity?> userResult =
         await locator.get<GetUserUsecase>().trigger(GetUserParam(p.userUuid!));
     final UserEntity? user = userResult.fold((l) => null, (r) => r);
     return CandidateEntity(
         slogan: p.slogan!,
         speech: p.speech!,
-        vote_count: vote,
+        vote_count: vote == null ? 0 : vote.voteCount,
         uuid: p.uuid!,
         user: user!);
   }

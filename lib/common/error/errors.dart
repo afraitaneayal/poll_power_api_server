@@ -188,3 +188,18 @@ class InvalidEmail extends GenericServerError with APIErrorHelper {
             userFriendlyMessage: "The email is not correct"));
   }
 }
+
+class CandidateNotFoundError extends GenericServerError with APIErrorHelper {
+  final String stackTrace;
+  CandidateNotFoundError(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  @override
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorError(
+            devMessage:
+                (stackTrace.isEmpty) ? "Candidate not found" : stackTrace,
+            userFriendlyMessage: "Candidate not found"));
+  }
+}

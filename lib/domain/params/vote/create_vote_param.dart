@@ -1,7 +1,7 @@
 class CreateVoteParam {
   final String candidateUuid;
   final String userUiid;
-  DateTime votedAt = DateTime.now();
+  final String votedAt;
 
-  CreateVoteParam(this.candidateUuid, this.userUiid);
+  CreateVoteParam(this.candidateUuid, this.userUiid, this.votedAt);
 }

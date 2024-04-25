@@ -6,5 +6,5 @@ import '../../../domain/params/vote/get_vote_param.dart';
 abstract class IVoteDatasourceRepository with TransformTo {
   Future<VoteEntity> vote(CreateVoteParam param);
   Future<List<VoteEntity>> getVotes(GetVoteParam param);
-  Future<VoteEntity> getVote(GetVoteParam param);
+  Future<VoteEntity?> getVote(GetVoteParam param);
 }
