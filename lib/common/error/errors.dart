@@ -203,3 +203,18 @@ class CandidateNotFoundError extends GenericServerError with APIErrorHelper {
             userFriendlyMessage: "Candidate not found"));
   }
 }
+
+class UserHasAlreadyVoted extends GenericServerError with APIErrorHelper {
+  final String stackTrace;
+  UserHasAlreadyVoted(this.stackTrace) : super(stackTrace);
+
+  // Get API error
+  @override
+  APIError getAPIError() {
+    return APIError(
+        error: APIErrorError(
+            devMessage:
+                (stackTrace.isEmpty) ? "User has already voted" : stackTrace,
+            userFriendlyMessage: "You have already voted"));
+  }
+}

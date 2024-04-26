@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:orm/orm.dart';
+import 'package:poll_power_api_server/common/error/errors.dart';
 import 'package:poll_power_api_server/common/helpers/uuid_helper/uuid_helper.dart';
 import 'package:poll_power_api_server/data/datasources/vote/i_vote_datasource_repository.dart';
 import 'package:poll_power_api_server/di.dart';
@@ -24,6 +25,11 @@ class LocalVoteDatasourceImpl implements IVoteDatasourceRepository {
 
   @override
   Future<VoteEntity> vote(CreateVoteParam param) async {
+    final Vote? userVote = await _client.vote.findFirst(
+        where: VoteWhereInput(userUuid: PrismaUnion.$2(param.userUiid)));
+    if (userVote != null) {
+      throw UserHasAlreadyVoted('');
+    }
     final Vote? candidateVote = await _client.vote.findFirst(
         where:
             VoteWhereInput(candidateUuid: PrismaUnion.$2(param.candidateUuid)));

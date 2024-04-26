@@ -90,7 +90,7 @@ class PollPowerAPIContractImpl extends Pollpower {
   @override
   Future<VoteCandidateResponse> voteCandidate(VotingRequest body) async {
     try {
-      // Basicaly the bearer contain the token so
+      // Basicaly the bearer contain the token so ...
       final String? bearer = BearerExtractor.extract(_request);
 
       if (bearer == null) {
@@ -109,14 +109,16 @@ class PollPowerAPIContractImpl extends Pollpower {
               CreateVoteParam(body.candidateId ?? "", uuid, body.votedAt!);
           final result = await _usecases.createVoteUsecase.trigger(param);
           return result.fold((l) {
-            return VoteCandidateResponse.response500(internalServerError(l));
+            return l is UserHasAlreadyVoted
+                ? VoteCandidateResponse.response500(
+                    UserHasAlreadyVoted('').getAPIError())
+                : VoteCandidateResponse.response500(internalServerError(l));
           }, (r) {
             return VoteCandidateResponse.response200();
           });
         }
       }
     } catch (e, stackTrace) {
-      print(e.toString());
       return VoteCandidateResponse.response500(
           InternalServerErrorWhileProccessing(stackTrace.toString())
               .getAPIError());

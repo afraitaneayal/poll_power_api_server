@@ -8,9 +8,13 @@ class ErrorCatcher {
       final result = await fn;
       return right(result);
     } catch (e, stackTrace) {
-      final error = e.toString();
-      print(error);
-      return left(GenericServerError(stackTrace.toString()));
+      print(stackTrace);
+      switch (e.runtimeType) {
+        case UserHasAlreadyVoted:
+          return left(UserHasAlreadyVoted(''));
+        default:
+          return left(GenericServerError(stackTrace.toString()));
+      }
     }
   }
 }
